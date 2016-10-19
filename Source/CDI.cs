@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using KSP.UI;
 using KSP.UI.Screens;
 using KSP.UI.Screens.Flight;
 
@@ -148,8 +149,8 @@ namespace Kramax
         public void GetNavBallRect()
         {
         	// ScreenSafeUI appears to no longer be used, so lets get out of here
-        	if (ScreenSafeUI.referenceCam == null)
-        		return;
+        	//if (ScreenSafeUI.referenceCam == null)
+        	//	return;
         		
             var navball = GameObject.FindObjectOfType<NavBall>();
 
@@ -164,7 +165,9 @@ namespace Kramax
 
             // position is (1.0,0.1,0.0) when visible
             // position is (1.0,-0.1,0.0) when not visible
-            var camera = ScreenSafeUI.referenceCam;
+            //var camera = ScreenSafeUI.referenceCam;
+            
+            var camera = UIMasterController.Instance.appCanvas.worldCamera;
 
             // this looks to be the center of the ball with Y counting up from bottom of screen
             // so 800,85 for 1600x1200 screen.

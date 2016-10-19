@@ -1,0 +1,17 @@
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\KramaxAutoPilot.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\KramaxAutoPilot.pdb
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\Assembly-CSharp-firstpass.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\Assembly-CSharp.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\KSPAssets.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\System.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\UnityEngine.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\UnityEngine.UI.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\TrackIRUnity.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\System.Xml.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\Mono.Cecil.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\TDx.TDxInput.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\Mono.Security.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\UnityEngine.xml
+D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.csprojResolveAssemblyReference.cache
+D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.pdb
