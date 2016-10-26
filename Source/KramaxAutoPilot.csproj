@@ -60,7 +60,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call $(ProjectDir)PostBuild.bat $(ConfigurationName) $(ProjectDir) $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>
+if $(ConfigurationName) == Release (
+start /D  D:\Users\jbb\github\KramaxAutoPilot\Source  /WAIT buildRelease.bat
+)
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -70,6 +74,7 @@
   </Target>
   -->
   <ItemGroup>
+    <None Include="buildRelease.bat" />
     <None Include="Kramax.version" />
   </ItemGroup>
   <ItemGroup>
