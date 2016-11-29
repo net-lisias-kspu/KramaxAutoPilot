@@ -14,3 +14,4 @@ D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Debug\UnityEngine.xml
 D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Debug\KramaxAutoPilot.dll
 D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Debug\KramaxAutoPilot.pdb
 D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Debug\System.Xml.dll
+D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Debug\KramaxAutoPilot.csprojResolveAssemblyReference.cache

@@ -41,6 +41,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssemblyVersion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyVersion.tt</DependentUpon>
+    </Compile>
     <Compile Include="CDI.cs" />
     <Compile Include="George.cs" />
     <Compile Include="KramaxAutoPilot.cs" />
@@ -65,6 +70,14 @@ if $(ConfigurationName) == Release (
 start /D  D:\Users\jbb\github\KramaxAutoPilot\Source  /WAIT buildRelease.bat
 )
 </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>set textTemplatingPath="%25CommonProgramFiles(x86)%25\Microsoft Shared\TextTemplating\$(VisualStudioVersion)\texttransform.exe"
+
+if %25textTemplatingPath%25=="\Microsoft Shared\TextTemplating\$(VisualStudioVersion)\texttransform.exe" set textTemplatingPath="%25CommonProgramFiles%25\Microsoft Shared\TextTemplating\$(VisualStudioVersion)\texttransform.exe"
+
+%25textTemplatingPath%25 "$(ProjectDir)AssemblyVersion.tt"
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -101,5 +114,14 @@ start /D  D:\Users\jbb\github\KramaxAutoPilot\Source  /WAIT buildRelease.bat
       <SpecificVersion>False</SpecificVersion>
       <HintPath>R:\KSP_1.1.4_dev\KSP_x64_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AssemblyVersion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyVersion.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
 </Project>
