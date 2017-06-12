@@ -65,7 +65,7 @@ namespace Kramax
             lastPlanetUp = planetUp;
             planetUp = (vessel.rootPart.transform.position - vessel.mainBody.position).normalized;
 //            planetEast = vessel.mainBody.getRFrmVel(vessel.findWorldCenterOfMass()).normalized;
-            planetEast = vessel.mainBody.getRFrmVel(vessel.mainBody.position).normalized;
+            planetEast = vessel.mainBody.getRFrmVel(vessel.GetWorldPos3D()).normalized;
             planetNorth = Vector3d.Cross(planetEast, planetUp).normalized;
 
             // Velocity forward and right vectors parallel to the surface
