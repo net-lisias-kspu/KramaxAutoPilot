@@ -11,7 +11,6 @@ D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\Mono.Cecil.dll
 D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\TDx.TDxInput.dll
 D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\Mono.Security.dll
 D:\Users\jbb\github\KramaxAutoPilot\Source\bin\Release\UnityEngine.xml
-D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.csprojResolveAssemblyReference.cache
 D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.csproj.CoreCompileInputs.cache
 D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.dll
 D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.pdb
