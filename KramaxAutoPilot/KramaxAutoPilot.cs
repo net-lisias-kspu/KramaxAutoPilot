@@ -108,7 +108,7 @@ namespace Kramax
             // install any callbacks
             // install in toolbar
             if (UseAppLauncher())
-                Kramax.Toolbar.AppLauncherAutoPilot.Start();
+                Kramax.Toolbar.AppLauncherAutoPilot.Start(this.gameObject);
             else
                 Kramax.Toolbar.ToolbarMod.Start();
 
@@ -132,6 +132,7 @@ namespace Kramax
             if (UseAppLauncher())
             {
                 Kramax.Toolbar.AppLauncherAutoPilot.setBtnState(bDisplayAutoPilot);
+             
             }
         }
 
@@ -165,7 +166,7 @@ namespace Kramax
         public void Draw()
         {
             if (bDisplayOptions)
-                window = GUILayout.Window(0984653, window, optionsWindow, "", GUILayout.Width(0), GUILayout.Height(0));
+                window = ClickThruBlocker.GUILayoutWindow(0984653, window, optionsWindow, "", GUILayout.Width(0), GUILayout.Height(0));
         }
 
        

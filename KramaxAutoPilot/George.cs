@@ -22,6 +22,8 @@ using System.Text;
 using UnityEngine;
 using KramaxReloadExtensions;
 
+using ClickThroughFix;
+
 namespace Kramax
 {
     using PID;
@@ -2405,11 +2407,11 @@ namespace Kramax
             }
             #endregion
 
-            window = GUILayout.Window(382498, window, displayWindow, "", GeneralUI.UISkin.box, GUILayout.Height(0), GUILayout.Width(width));
+            window = ClickThruBlocker.GUILayoutWindow(382498, window, displayWindow, "", GeneralUI.UISkin.box, GUILayout.Height(0), GUILayout.Width(width));
 
             // tooltip window. Label skin is transparent so it's only drawing what's inside it
             if (tooltip != "" && KramaxAutoPilot.bDisplayTooltips)
-                GUILayout.Window(382499, new Rect(Input.mousePosition.x + 20, // window.x + window.width,
+                ClickThruBlocker.GUILayoutWindow(382499, new Rect(Input.mousePosition.x + 20, // window.x + window.width,
                                                  Screen.height - Input.mousePosition.y + 20,
                                                  300, 0),
                                  tooltipWindow, "", GeneralUI.UISkin.label);
@@ -2438,7 +2440,7 @@ namespace Kramax
                 flightPlanManagerWindow.y = window.y + 200;
 
                 flightPlanManagerWindow =
-                    GUILayout.Window(382500, flightPlanManagerWindow, DisplayFlightPlanManagerWindow,
+                    ClickThruBlocker.GUILayoutWindow(382500, flightPlanManagerWindow, DisplayFlightPlanManagerWindow,
                                      "", GeneralUI.UISkin.box, GUILayout.Width(300));
             }
 
@@ -2448,7 +2450,7 @@ namespace Kramax
                 presetWindow.x = window.x + window.width;
                 presetWindow.y = window.y;
 
-                presetWindow = GUILayout.Window(382501, presetWindow, displayPresetWindow, "", GeneralUI.UISkin.box, GUILayout.Width(200));
+                presetWindow = ClickThruBlocker.GUILayoutWindow(382501, presetWindow, displayPresetWindow, "", GeneralUI.UISkin.box, GUILayout.Width(200));
             }
         }
 

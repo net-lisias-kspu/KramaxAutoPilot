@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -126,12 +126,12 @@ namespace Kramax
             /// accounting for rotation is the most important, the nearby position will work for now.
             /// Vector3 location = closestPart.partTransform.position - v.CurrentCoM;
             /// 
-            vesselFacingAxis = closestPart.transform.localRotation * closestPart.orgRot.Inverse() * Vector3.up;
+            vesselFacingAxis = closestPart.transform.localRotation * Quaternion.Inverse(closestPart.orgRot) * Vector3.up;
             if (closestPart.symmetryCounterparts != null)
             {
                 for (int i = 0; i < closestPart.symmetryCounterparts.Count; i++)
                 {
-                    vesselFacingAxis += closestPart.symmetryCounterparts[i].transform.localRotation * closestPart.symmetryCounterparts[i].orgRot.Inverse() * Vector3.up;
+                    vesselFacingAxis += closestPart.symmetryCounterparts[i].transform.localRotation * Quaternion.Inverse(closestPart.symmetryCounterparts[i].orgRot) * Vector3.up;
                 }
                 vesselFacingAxis /= (closestPart.symmetryCounterparts.Count + 1);
             }

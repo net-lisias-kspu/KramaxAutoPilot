@@ -1,0 +1,26 @@
+
+
+0.3.4
+	Updated for 1.3.1
+	Fix for Heading hold not working., thanks @DavidShade
+	added extras directory and flight plans
+
+
+
+0.3.2.3
+	Updated for 1.3
+
+0.3.2.2
+	Added code to put version in to assembly version info
+
+0.3.2.1
+	Updated version
+
+0.3.2
+	update for 1.2
+
+0.3.1
+	Updated for 1.1.2
+
+0.3.0
+	Updated for 1.1

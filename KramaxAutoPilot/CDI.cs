@@ -9,6 +9,8 @@ using KSP.UI;
 using KSP.UI.Screens;
 using KSP.UI.Screens.Flight;
 
+using ClickThroughFix;
+
 namespace Kramax
 {
     // Used to use code from http://wiki.unity3d.com/index.php?title=DrawLine but no longer needed.
@@ -206,7 +208,7 @@ namespace Kramax
 
                 GUI.backgroundColor = Color.clear;
                 window =
-                    GUI.Window(34248, window, DisplayCDI, "",
+                   ClickThruBlocker.GUIWindow(34248, window, DisplayCDI, "",
                     // GeneralUI.UISkin.customStyles[(int)myStyles.txWindow],
                                      GeneralUI.UISkin.box);
                 GUI.backgroundColor = GeneralUI.stockBackgroundGUIColor;
