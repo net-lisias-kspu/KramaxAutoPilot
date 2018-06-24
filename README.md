@@ -1,5 +1,9 @@
-Kramax Autopilot
+Kramax Autopilot *Unofficial*
 ================
+This is a **non official** fork for Kramax Autopilot.
+
+Original Intro
+==============
 Recently I started flying spaceplanes in Kerbal and discovered I could never land them successfully. My keyboard flying skills are sub-par. This despite being an instrumented rated pilot of real planes.
 
 I found a very good autopilot mod by Crzyrndm called "Pilot Assistant". But it did not have any course following abilities. I have taken the source code for Pilot Assistant and heavily modified it to add course guidance (both horizontal and vertical) so that it can autoland a spaceplane on the KSC runway. Many thanks to Crzyrndm--this mod would never have happened without the excellent starting point. Note that I did not keep all the capabilities of Pilot Assistant--I was very focused on auto-landing and things that were not really needed for that were omitted.
@@ -46,3 +50,11 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 This work is a derivative of "Pilot Assistant" by Crzyrndm that was distributed under the same license.
 The original work was found at https://github.com/Crzyrndm/Pilot-Assistant.
 
+UPSTREAM
+========
+* Official Fork:
+	+ https://github.com/linuxgurugamer/KramaxAutoPilot
+* Original:
+	+ https://github.com/Kramax/KramaxAutoPilot
+	+ Derivative from:
+		- https://github.com/Crzyrndm/Pilot-Assistant
