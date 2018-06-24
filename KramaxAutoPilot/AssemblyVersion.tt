@@ -2,7 +2,7 @@
 <#@ import namespace="System.IO" #>
 <#@ output extension=".cs" #>
 
-<#@ assembly name="EnvDTE" #><# /* This assembly provides access to Visual Studio project properties. */ #>
+<!--  assembly name="EnvDTE" --><# /* This assembly provides access to Visual Studio project properties. */#>
 <#
 
 	// Instructions
@@ -27,7 +27,7 @@
 	int i2 = 0;
 	string s;
 
-	string versionfile =  @"D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot.version";
+	string versionfile =  @"/Users/lisias/Workspaces/KSP/GIT/KramaxAutoPilot/KramaxAutoPilot.version";
 	if (!File.Exists(versionfile))
 	{
 		Write("File: " + versionfile + " missing\n");		
