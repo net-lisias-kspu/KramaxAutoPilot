@@ -58,6 +58,9 @@
     <Compile Include="VesselData.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Version.cs">
+      <DependentUpon>Version.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -76,9 +79,10 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="AssemblyVersion.tt">
+    <Content Include="Version.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyVersion.cs</LastGenOutput>
+      <LastGenOutput>Version.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +107,21 @@
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\LIB\managed\1.4.1\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>bin\Debug\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>bin\Debug\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ClickThroughBlocker">
+      <HintPath>bin\Debug\ClickThroughBlocker.dll</HintPath>
+    </Reference>
+    <Reference Include="ToolbarControl">
+      <HintPath>bin\Debug\ToolbarControl.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>bin\Debug\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>bin\Debug\UnityEngine.UI.dll</HintPath>
