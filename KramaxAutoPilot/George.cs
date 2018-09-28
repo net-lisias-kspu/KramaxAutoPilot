@@ -1224,6 +1224,9 @@ namespace Kramax
         Vector2 FlightPlanScrollbar = Vector2.zero;
         public float flightPlanScrollHeight = 300;
         public static float maxFlightPlanScrollbarHeight = 300;
+        Vector2 FlightPlanManagerScrollbar = Vector2.zero;
+        public float flightPlanManagerScrollHeight = 500;
+        public static float maxFlightPlanManagerScrollbarHeight = 500;
 
         float dragStart = 0;
         float dragID = 0; // 0 = inactive, 1 = hdg, 2 = vert, 3 = thrt
@@ -3983,6 +3986,13 @@ namespace Kramax
             GUI.backgroundColor = GeneralUI.stockBackgroundGUIColor;
 
 
+            FlightPlanManagerScrollbar =
+                GUILayout.BeginScrollView(FlightPlanManagerScrollbar, GUIStyle.none,
+                     GeneralUI.UISkin.verticalScrollbar,
+                     GUILayout.Height(Math.Min(flightPlanManagerScrollHeight, maxFlightPlanManagerScrollbarHeight)));
+
+            GUILayout.BeginVertical();
+
             if (plans == null || plans.Count == 0)
             {
                 GUILayout.Label(String.Format("<no flight plans for {0}>", planet.name));
@@ -4001,6 +4011,32 @@ namespace Kramax
 
             if (Event.current.type == EventType.Repaint)
                 tooltip = GUI.tooltip;
+
+            GUILayout.EndVertical();
+            GUILayout.EndScrollView();
+
+            if (GUILayout.RepeatButton("", GUILayout.Height(8)))
+            {// drag resizing code from Dmagics Contracts window + used as a template
+                if (dragID == 0 && Event.current.button == 0)
+                {
+                    dragID = 3;
+                    dragStart = Input.mousePosition.y;
+                    maxFlightPlanManagerScrollbarHeight = flightPlanManagerScrollHeight = Math.Min(maxFlightPlanManagerScrollbarHeight, flightPlanManagerScrollHeight);
+                }
+            }
+            if (dragID == 3)
+            {
+                if (Input.GetMouseButtonUp(0))
+                    dragID = 0;
+                else
+                {
+                    float height = Math.Max(Input.mousePosition.y, 0);
+                    maxFlightPlanManagerScrollbarHeight += dragStart - height;
+                    flightPlanManagerScrollHeight = maxFlightPlanManagerScrollbarHeight = Mathf.Clamp(maxFlightPlanManagerScrollbarHeight, 10, 500);
+                    if (maxFlightPlanManagerScrollbarHeight > 10)
+                        dragStart = height;
+                }
+            }
         }
         #endregion
     }
