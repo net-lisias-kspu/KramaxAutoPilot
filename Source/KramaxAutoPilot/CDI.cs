@@ -143,7 +143,7 @@ namespace Kramax
             window.width = (int)(navBallRect.width * (300.0f/223.0f));
             window.height = (int)(navBallRect.height * (255.0f / 200.0f));
             window.x = (int) (0.5+navBallRect.x - ((688.0f - 655.0f) * (window.width / 300.0f)));
-            window.y = (int) (0.5+navBallRect.y - ((1000 - 965) * (window.height / 255.0f)));
+            window.y = (int)(0.5 + navBallRect.y - ((1000 - 960) * (window.height / 255.0f)));
 
             Deb.Log("CDI overlay rect: {0}", window);
         }
@@ -422,7 +422,10 @@ namespace Kramax
                   GeneralUI.UISkin.customStyles[(int)myStyles.cdiLabel]);
             }    
 		// uncommented the following to allow user to move the CDI whereever they want
-            GUI.DragWindow();
+            if(!George.lockCDI)
+            {
+                GUI.DragWindow();
+            }
         }
     }
 }
