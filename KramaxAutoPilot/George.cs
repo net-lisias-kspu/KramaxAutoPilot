@@ -1174,6 +1174,7 @@ namespace Kramax
         public static Rect window = new Rect(10, 130, 10, 10);
 
         public static bool showPresets = false;
+        public static bool lockCDI = false;
         public static bool showPIDLimits = false;
         public static bool showControlSurfaces = false;
         public static bool doublesided = false;
@@ -2740,6 +2741,10 @@ namespace Kramax
                                  GeneralUI.UISkin.customStyles[(int)myStyles.btnToggle]);
 
             GUILayout.FlexibleSpace();
+
+            lockCDI =
+                GUILayout.Toggle(lockCDI, new GUIContent("L", "Lock/Unlock CDI Move"),
+                                 GeneralUI.UISkin.customStyles[(int)myStyles.btnToggle]);
 
             showPresets =
                 GUILayout.Toggle(showPresets, new GUIContent("P", "Show/Hide Presets"),
