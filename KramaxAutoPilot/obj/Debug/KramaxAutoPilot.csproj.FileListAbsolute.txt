@@ -31,5 +31,5 @@ D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Debug\Ionic.Zip.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Debug\TDx.TDxInput.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Debug\RedShellSDK.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Debug\KramaxAutoPilot.csproj.CopyComplete
-D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Debug\ClickThroughBlocker.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Debug\ToolbarControl.dll
+D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Debug\KramaxAutoPilot.csprojResolveAssemblyReference.cache

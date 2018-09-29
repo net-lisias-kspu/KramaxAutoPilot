@@ -17,7 +17,6 @@ D:\Users\jbb\github\KramaxAutoPilot\Source\obj\Release\KramaxAutoPilot.pdb
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\KramaxAutoPilot.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\KramaxAutoPilot.pdb
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\Assembly-CSharp.dll
-D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\ClickThroughBlocker.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\ToolbarControl.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\UnityEngine.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\UnityEngine.UI.dll
@@ -32,3 +31,4 @@ D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csproj.CopyComplete
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.pdb
+D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csprojResolveAssemblyReference.cache
