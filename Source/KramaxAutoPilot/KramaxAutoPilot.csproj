@@ -59,7 +59,7 @@
     <Compile Include="VesselData.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Version.cs">
+    <Compile Include="Properties\Version.cs">
       <DependentUpon>Version.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -80,7 +80,7 @@
   </Target>
   -->
   <ItemGroup>
-    <Content Include="Version.tt">
+    <Content Include="Properties\Version.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Version.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

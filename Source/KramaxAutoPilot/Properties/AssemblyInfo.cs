@@ -33,8 +33,10 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 //[assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyFileVersion(KramaxAutoPilot.Version.Number)]
-[assembly: AssemblyVersion(KramaxAutoPilot.Version.Number)]
+[assembly: AssemblyFileVersion(Kramax.Version.Number)]
+[assembly: AssemblyVersion(Kramax.Version.Number)]
+[assembly: KSPAssembly("KramaxAutoPilot", Kramax.Version.major, Kramax.Version.minor)]
 
+[assembly: KSPAssemblyDependency("KSPe", 2, 0)]
 [assembly: KSPAssemblyDependency("ClickThroughBlocker", 1, 0)]
 [assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
