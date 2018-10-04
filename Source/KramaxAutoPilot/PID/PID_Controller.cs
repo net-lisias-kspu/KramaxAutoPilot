@@ -1,5 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using KSPe;
+
+using Deb = Kramax.Utility.Deb;
 
 namespace Kramax.PID
 {
@@ -42,7 +45,6 @@ namespace Kramax.PID
         public bool bShow { get; set; }
         public bool skipDerivative { get; set; }
         public bool isHeadingControl { get; set; }
-        public bool debug { get; set; }
 
         public PID_Controller(double Kp, double Ki, double Kd, double OutputMin, double OutputMax, double intClampLower, double intClampUpper, double scalar = 1, double easing = 1)
         {
@@ -55,7 +57,6 @@ namespace Kramax.PID
             integralClampUpper = intClampUpper;
             r_scale = 1/scalar;
             this.easing = easing;
-            this.debug = false;
         }
 
         public PID_Controller(double[] gains)
@@ -69,15 +70,13 @@ namespace Kramax.PID
             integralClampUpper = gains[6];
             r_scale = 1/gains[7];
             easing = gains[8];
-            this.debug = false;
         }
         
         public virtual double ResponseD(double input, bool useIntegral)
         {
             if (active_setpoint != target_setpoint)
             {
-                if (debug)
-                    Deb.Log("ResponseD: ease setpoint.");
+                Deb.Log("ResponseD: ease setpoint.");
 
                 increment += easing * TimeWarp.fixedDeltaTime * 0.01;
                 if (active_setpoint < target_setpoint)
@@ -96,29 +95,18 @@ namespace Kramax.PID
                 }
             }
 
-            if (debug)
-            {
-                Deb.Log("ResponseD: raw input:{0:F2}, set:{1:F2}", input, active_setpoint);
-            }
+            Deb.Log("ResponseD: raw input:{0:F2}, set:{1:F2}", input, active_setpoint);
 
             input = (invertInput ? -1 : 1) * Utils.Clamp(input, inMin, inMax);
 
             dt = TimeWarp.fixedDeltaTime;
             error = input - active_setpoint;
 
-            if (debug)
-            {
-                Deb.Log("ResponseD: input:{0:F2} dt:{1:F2} error:{2:F2}", input, dt, error);
-            }
-
+            Deb.Log("ResponseD: input:{0:F2} dt:{1:F2} error:{2:F2}", input, dt, error);
 
             if (skipDerivative)
             {
-                if (debug)
-                {
-                    Deb.Log("ResponseD: skipDerivative");
-                }
-
+                Deb.Log("ResponseD: skipDerivative");
 
                 skipDerivative = false;
                 previous = input;
@@ -128,17 +116,13 @@ namespace Kramax.PID
             var sum_error = integralError(error, useIntegral);
             var delta_error = derivativeError(input);
 
-            if (debug)
-            {
-                Deb.Log("ResponseD: sum={0:F2}, P:{1:F2}, I:{2:F2}, D:{3:F2}", 
-                    sum, prop_error, sum_error, delta_error);
-            }
+            Deb.Log("ResponseD: sum={0:F2}, P:{1:F2}, I:{2:F2}, D:{3:F2}", 
+                sum, prop_error, sum_error, delta_error);
             
             lastOutput =
              (invertOutput ? -1 : 1) * Utils.Clamp(prop_error + sum_error + delta_error, outMin, outMax);
             
-            if (debug)
-                Deb.Log("ResponseD: out:{0:F3}", lastOutput);
+            Deb.Log("ResponseD: out:{0:F3}", lastOutput);
 
             return lastOutput;
         }

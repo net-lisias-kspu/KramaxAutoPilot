@@ -23,34 +23,6 @@ using UnityEngine;
 
 namespace Kramax.Utility
 {
-    public static class Deb
-    {
-        public static void Log(String format, params System.Object[] args)
-        {
-            Debug.Log("[KRAMAX] " + String.Format(format, args));
-        }
-
-        public static void Log(String message)
-        {
-            Debug.Log("[KRAMAX] " + message);
-        }
-
-        public static void Verb(String format, params System.Object[] args)
-        {
-            Debug.Log("[KRAMAX] " + String.Format(format, args));
-        }
-
-        public static void Verb(String message)
-        {
-            Debug.Log("[KRAMAX] " + message);
-        }
-
-        public static void Err(String format, params System.Object[] args)
-        {
-            Debug.LogError("[KRAMAX] " + String.Format(format, args));
-        }
-    }
-
     public static class Utils
     {
         public static float Clamp(this float val, float min, float max)

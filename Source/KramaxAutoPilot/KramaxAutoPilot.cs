@@ -101,7 +101,12 @@ namespace Kramax
          */
         public void Start()
         {
-            Deb.Log("KramaxAutoPilot: Start {0}", this.GetInstanceID()); 
+#if DEBUG
+			Deb.debug = true;
+#else
+			Deb.debug = false;
+#endif
+			Deb.Log("KramaxAutoPilot: Start {0}", this.GetInstanceID()); 
           
             // read in config
             // initialize any variables
