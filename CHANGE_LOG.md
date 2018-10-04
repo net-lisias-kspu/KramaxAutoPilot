@@ -2,6 +2,8 @@
 
 * 2018-0929: 0.3.6 (linuxgurugamer) for KSP 1.4.1
 	+ Added FlightPlanManagerWindow Scrollbar
+* 2018-1004: 0.3.5.1 (Lisias) for KSP 1.1 PRE-RELEASE
+	+ Internship Pre Release - Not that much to see here, just wetting my feet.
 * 2018-0419: 0.3.5 (linuxgurugamer) for KSP 1.4.1
 	+ Updated for 1.4.1
 	+ Added support for the Clickthrough blocker
