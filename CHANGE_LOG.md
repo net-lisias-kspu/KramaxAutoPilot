@@ -1,5 +1,7 @@
 # KramaxAutoPilot /L :: Change Log
 
+* 2018-0929: 0.3.6 (linuxgurugamer) for KSP 1.4.1
+	+ Added FlightPlanManagerWindow Scrollbar
 * 2018-0419: 0.3.5 (linuxgurugamer) for KSP 1.4.1
 	+ Updated for 1.4.1
 	+ Added support for the Clickthrough blocker
