@@ -1,5 +1,7 @@
 # KramaxAutoPilot /L :: Change Log
 
+* 2016-1019: 0.3.2-beta (linuxgurugamer) for KSP 1.3 PRE-RELEASE
+	+ No changelog provided
 * 2017-0530: 0.3.2.3 (linuxgurugamer) for KSP 1.3
 	+ Updated for 1.3
 * 2016-1129: 0.3.2.2 (linuxgurugamer) for KSP 1.1
