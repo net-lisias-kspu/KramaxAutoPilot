@@ -1,37 +1,38 @@
 #!/usr/bin/env bash
 
-source ../CONFIG.inc
+source ./CONFIG.inc
 
-function copyifneeded {
-	local src=$1
-	local targetdir=$2
-	local filename="${fullfile##*/}"
-
-	if [ ! -f $src ] ; then
-		return 1
-	fi
-
-	if [ ! -f $targetdir/$filename ] ; then
-		cp $src $targetdir
-		return 0
-	fi
-
-	local mtf0=`stat -c %Y $src`
-	local mtf1=`stat -c %Y $targetdir/$filename`
-	local dt=$(( mtf1 - mtf0 ))
-	if [[ $dt -gt 0 ]] ; then
-		cp $source $targetdir
+check() {
+	if [ ! -d "./GameData/$TARGETBINDIR/" ] ; then
+		rm -f "./GameData/$TARGETBINDIR/"
+		mkdir -p "./GameData/$TARGETBINDIR/"
 	fi
 }
 
+deploy() {
+	local DLL=$1
 
-DEPLOYDIR=./GameData/KramaxAutoPilot/Plugins
-rm $DEPLOYDIR/*.dll
-rm $DEPLOYDIR/*.pdb
+	if [ -f "./bin/Release/$DLL.dll" ] ; then
+		cp "./bin/Release/$DLL.dll" "./GameData/$TARGETBINDIR/"
+		if [ -d "${KSP_DEV}/GameData/$TARGETBINDIR/" ] ; then
+			cp "./bin/Release/$DLL.dll" "${KSP_DEV/}GameData/$TARGETBINDIR/"
+		fi
+	fi
+	if [ -f "./bin/Debug/$DLL.dll" ] ; then
+		if [ -d "${KSP_DEV}/GameData/$TARGETBINDIR/" ] ; then
+			cp "./bin/Debug/$DLL.dll" "${KSP_DEV}GameData/$TARGETBINDIR/"
+		fi
+	fi
+}
 
-copyifneeded ./KramaxAutoPilot/bin/Release/KramaxAutoPilot.dll $DEPLOYDIR
-copyifneeded ./KramaxAutoPilot/bin/Debug/KramaxAutoPilot.dll $DEPLOYDIR
-copyifneeded ./KramaxAutoPilot/bin/Debug/KramaxAutoPilot.pdb $DEPLOYDIR
+VERSIONFILE=UbioWeldContinuum.version
 
-copyifneeded $DEPLOYDIR/KramaxAutoPilot.dll $KSP_DEV/GameData/KramaxAutoPilot/Plugins
-copyifneeded $DEPLOYDIR/KramaxAutoPilot.pdb $KSP_DEV/GameData/KramaxAutoPilot/Plugins
+check
+cp $VERSIONFILE "./GameData/$TARGETDIR"
+cp CHANGE_LOG.md "./GameData/$TARGETDIR"
+cp README.md  "./GameData/$TARGETDIR"
+cp LICENSE "./GameData/$TARGETDIR"
+cp NOTICE "./GameData/$TARGETDIR"
+for dll in $PACKAGE ; do
+    deploy $dll
+done
