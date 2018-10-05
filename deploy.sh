@@ -25,7 +25,7 @@ deploy() {
 	fi
 }
 
-VERSIONFILE=UbioWeldContinuum.version
+VERSIONFILE=$PACKAGE.version
 
 check
 cp $VERSIONFILE "./GameData/$TARGETDIR"
