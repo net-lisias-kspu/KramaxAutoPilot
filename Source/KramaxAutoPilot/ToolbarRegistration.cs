@@ -6,7 +6,7 @@ namespace Kramax
     [KSPAddon(KSPAddon.Startup.MainMenu, true)]
     public class RegisterToolbar : MonoBehaviour
     {
-        void Start()
+		public void Awake()
         {
             ToolbarControl.RegisterMod(Kramax.Toolbar.AppLauncherAutoPilot.MODID, Kramax.Toolbar.AppLauncherAutoPilot.MODNAME);
         }
