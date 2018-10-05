@@ -20,7 +20,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using KramaxReloadExtensions;
+
+#if DEBUG
+//TODO: Redirect this to the debugging version of the reloader.
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#else
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#endif
 
 namespace Kramax
 {
@@ -63,8 +69,7 @@ namespace Kramax
      * {KSP}/KSP_Data/output_log.txt.
      */
     [KSPAddon(KSPAddon.Startup.Flight, false)]
-	public class KramaxAutoPilot : ReloadableMonoBehaviour
-//	public class KramaxAutoPilot : MonoBehaviour
+	public class KramaxAutoPilot : MonoBehaviour
     {
         bool bUseStockToolbar = true;
         public static bool bDisplayAutoPilot = false; // set by launcher

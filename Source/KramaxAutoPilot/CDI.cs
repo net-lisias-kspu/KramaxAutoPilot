@@ -1,6 +1,4 @@
-﻿using Kramax.Utility;
-using KramaxReloadExtensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +8,16 @@ using KSP.UI.Screens;
 using KSP.UI.Screens.Flight;
 
 using ClickThroughFix;
+
+using Kramax.Utility;
+
+#if DEBUG
+//TODO: Redirect this to the debugging version of the reloader.
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#else
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#endif
+
 
 namespace Kramax
 {
@@ -103,8 +111,7 @@ namespace Kramax
         }
     }
 
-	public class CDI : ReloadableMonoBehaviour
-//	public class CDI : MonoBehaviour
+	public class CDI : MonoBehaviour
     {             
         public bool bShowCDI = true;
         public bool bShowH = true;

@@ -24,7 +24,12 @@ using UnityEngine;
 using KSPe;
 using ClickThroughFix;
 
-using KramaxReloadExtensions;
+#if DEBUG
+//TODO: Redirect this to the debugging version of the reloader.
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#else
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#endif
 
 namespace Kramax
 {
@@ -1116,8 +1121,7 @@ namespace Kramax
     }
 
 
-	public class George : ReloadableMonoBehaviour
-//	public class George : MonoBehaviour
+	public class George : MonoBehaviour
     {
         #region Globals
         public Vessel vessel = null;

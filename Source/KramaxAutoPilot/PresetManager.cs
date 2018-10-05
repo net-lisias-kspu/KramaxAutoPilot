@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using KramaxReloadExtensions;
+
+#if DEBUG
+//TODO: Redirect this to the debugging version of the reloader.
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#else
+using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
+#endif
 
 namespace Kramax
 {
@@ -11,8 +17,7 @@ namespace Kramax
     using Presets;
 
     [KSPAddon(KSPAddon.Startup.Flight, true)]
-	public class PresetManager : ReloadableMonoBehaviour
-//	public class PresetManager : MonoBehaviour
+	public class PresetManager : MonoBehaviour
     {
         private static PresetManager instance;
         public static PresetManager Instance
