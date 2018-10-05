@@ -20,9 +20,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using KramaxReloadExtensions;
 
+using KSPe;
 using ClickThroughFix;
+
+using KramaxReloadExtensions;
 
 namespace Kramax
 {
@@ -3648,10 +3650,10 @@ namespace Kramax
         CelestialBody planet;
         public bool bDisplayFlightPlanManager;
 
-        const string flightPlanPath = "GameData/KramaxAutoPilot/FlightPlans.cfg";
-        const string flightPlansNodeName = "KramaxAutoPilotPlans";
-        const string defFlightPlanPath = "GameData/KramaxAutoPilot/DefaultFlightPlans.cfg";
-        const string defFlightPlansNodeName = "KramaxAutoPilotPlansDefault";
+        private const string flightPlansNodeName = "KramaxAutoPilotPlans";
+		private const string defFlightPlansNodeName = "KramaxAutoPilotPlansDefault";
+        public readonly AssetConfig DEFAULTFLIGHTPLAN = AssetConfig.ForType<KramaxAutoPilot>(flightPlansNodeName, "DefaultFlightPlans.cfg");
+        public readonly PluginConfig FLIGHTPLAN = PluginConfig.ForType<KramaxAutoPilot>(flightPlansNodeName, "_FlightPlans.cfg");
 
         public void StartFlightPlanManager()
         {
@@ -3693,16 +3695,6 @@ namespace Kramax
                     }
                 }
             }
-        }
-
-        public String GetFlightPlanURI()
-        {
-            return KSPUtil.ApplicationRootPath.Replace("\\", "/") + flightPlanPath;
-        }
-
-        public String GetDefFlightPlanURI()
-        {
-            return KSPUtil.ApplicationRootPath.Replace("\\", "/") + defFlightPlanPath;
         }
 
         private void LoadPlansFromNode(ConfigNode node)
@@ -3748,16 +3740,8 @@ namespace Kramax
             }
         }
 
-        private void LoadPlansFromSingleFile(String path)
+        private void LoadPlansFromSingleFile(ConfigNode root)
         {
-            ConfigNode root = ConfigNode.Load(path);
-
-            if (root == null)
-            {
-                Deb.Err("LoadPlansFromFile: load of node at {0} failed.", path);
-                return;
-            }
-
             foreach (ConfigNode node in root.nodes)
             {
                 Deb.Log("LoadPlansFromFile: tl node {0}", node.name);
@@ -3785,8 +3769,9 @@ namespace Kramax
         private void LoadPlansFromFiles()
         {
             flightPlansDict.Clear();
-            LoadPlansFromSingleFile(GetDefFlightPlanURI());
-            LoadPlansFromSingleFile(GetFlightPlanURI());
+            LoadPlansFromSingleFile(DEFAULTFLIGHTPLAN.Load().Node);
+			if (FLIGHTPLAN.IsLoadable)
+                LoadPlansFromSingleFile(FLIGHTPLAN.Load().Node);
 
             planet = vessel.mainBody;
 
@@ -3889,7 +3874,7 @@ namespace Kramax
                 }
             }
 
-            rootNode.Save(GetFlightPlanURI());
+			FLIGHTPLAN.Save(rootNode);
         }
 
         private void DisplayFlightPlanManagerWindow(int id)
@@ -3910,7 +3895,7 @@ namespace Kramax
 
             GUI.backgroundColor = GeneralUI.ActiveBackground;
 
-            if (GUILayout.Button(new GUIContent("Refresh", "Reload from " + flightPlanPath),
+            if (GUILayout.Button(new GUIContent("Refresh", "Reload from " + FLIGHTPLAN.KspPath),
                                  GUILayout.Width(100),
                                  GUILayout.Height(22)))
             {
