@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using KSP.UI.Screens;
 
+using GDB = KSPe.GameDB;
+using KSPe.IO;
+
 using ToolbarControl_NS;
 
 namespace Kramax.Toolbar
@@ -27,8 +30,8 @@ namespace Kramax.Toolbar
                 ApplicationLauncher.AppScenes.MAPVIEW,
                 MODID,
                 "kramaxButton",
-                "KramaxAutoPilot/Icon/icon-38",
-                "KramaxAutoPilot/Icon/icon-24",
+                GDB.Asset<KramaxAutoPilot>.Solve("Icon/icon-38"),
+                GDB.Asset<KramaxAutoPilot>.Solve("Icon/icon-24"),
                 MODNAME
             );
         }
