@@ -88,14 +88,15 @@
  // 
  namespace Kramax
  {
-        static class Version
-        {
-                public const int major = <#= major #>;
-                public const int minor = <#= minor #>;
-                public const int patch = <#= patch #>;
-                public const int build = <#= build #>;
-                public const string Number = "<#= major #>.<#= minor #>.<#= patch #>.<#= build #>";
-                public const string Text = Number + "/L";
-                public const string Vendor = "net.lisias.ksp";
-        }
+	static class Version
+	{
+		public const int major = <#= major #>;
+		public const int minor = <#= minor #>;
+		public const int patch = <#= patch #>;
+		public const int build = <#= build #>;
+		public const string Number = "<#= major #>.<#= minor #>.<#= patch #>.<#= build #>";
+		public const string Text = Number + "/L";
+		public const string Vendor = "net.lisias.ksp";
+		public const string Namespace = "KramaxAutoPilot";
+	}
 }
