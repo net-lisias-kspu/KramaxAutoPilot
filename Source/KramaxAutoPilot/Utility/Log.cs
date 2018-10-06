@@ -9,12 +9,12 @@ namespace Kramax.Utility
 		private static Logger logger = new UnityLogger("KRAMAX");
 		public static bool debug { 
 			get => logger.level > Level.INFO; 
-			set => logger.level = debug ? Level.TRACE : Level.INFO;
+			set => logger.level = value ? Level.TRACE : Level.INFO;
 		}
 
 		public static void Log(String format, params System.Object[] args)
         {
-            logger.detail(format, args);
+            logger.trace(format, args);
         }
 
         public static void Log(String message)

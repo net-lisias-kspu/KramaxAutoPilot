@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using KSPe;
+
 #if DEBUG
 //TODO: Redirect this to the debugging version of the reloader.
 using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
@@ -34,8 +36,8 @@ namespace Kramax
 
         public Dictionary<string, CraftPreset> craftPresetDict = new Dictionary<string, CraftPreset>();
 
-        const string presetsPath = "GameData/KramaxAutoPilot/Presets.cfg";
-        const string defaultsPath = "GameData/KramaxAutoPilot/Defaults.cfg";
+        private static readonly PluginConfig Defaults = PluginConfig.ForType<KramaxAutoPilot>(null, "Defaults.userprefs");
+        private static readonly PluginConfig Presets = PluginConfig.ForType<KramaxAutoPilot>(null, "Presets.userprefs");
 
         const string craftDefaultName = "default";
         const string apDefaultName = "default";
@@ -99,8 +101,9 @@ namespace Kramax
         public static void loadPresetsFromFile()
         {
             APPreset asstDefault = null;
+			Presets.Load();
             
-            foreach (ConfigNode node in GameDatabase.Instance.GetConfigNodes(apPresetNodeName))
+            foreach (ConfigNode node in Presets.Node.GetNodes(apPresetNodeName))
             {
                 if (node == null)
                     continue;
@@ -143,7 +146,7 @@ namespace Kramax
             }
             */
 
-            foreach (ConfigNode node in GameDatabase.Instance.GetConfigNodes(craftPresetNodeName))
+            foreach (ConfigNode node in Presets.Node.GetNodes(craftPresetNodeName))
             {
                 if (node == null || instance.craftPresetDict.ContainsKey(node.GetValue("name")))
                     continue;
@@ -194,7 +197,7 @@ namespace Kramax
                 node.AddNode(CraftNode(cP.Value));
             }
 
-            node.Save(KSPUtil.ApplicationRootPath.Replace("\\", "/") + presetsPath);
+			Presets.Save(node);
         }
 
         public static void saveDefaults()
@@ -206,7 +209,7 @@ namespace Kramax
                 node.AddNode(APPresetNode(cP.apPreset));
 
             node.AddNode(CraftNode(cP));
-            node.Save(KSPUtil.ApplicationRootPath.Replace("\\", "/") + defaultsPath);
+			Defaults.Save(node);
         }
 
         public static void updateDefaults()

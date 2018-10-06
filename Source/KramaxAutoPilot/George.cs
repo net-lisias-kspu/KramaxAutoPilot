@@ -502,7 +502,7 @@ namespace Kramax
 
     }
 
-    public class FlightPlan : CourseUtils
+    public class FlightPlan : CourseUtils, IComparable<FlightPlan>
     {
         public String name = "flightplan";
         public String description = "Generic Flight Plan";
@@ -1118,7 +1118,12 @@ namespace Kramax
             george.WayPointSequenced(next);
             CheckForSequence(george, vessel, vdata);
         }
-    }
+
+		int IComparable<FlightPlan>.CompareTo(FlightPlan other)
+		{
+			return this.name.ToLower().CompareTo(other.name.ToLower());
+		}
+	}
 
 
 	public class George : MonoBehaviour
@@ -3654,10 +3659,10 @@ namespace Kramax
         CelestialBody planet;
         public bool bDisplayFlightPlanManager;
 
-        private const string flightPlansNodeName = "KramaxAutoPilotPlans";
-		private const string defFlightPlansNodeName = "KramaxAutoPilotPlansDefault";
-        public readonly AssetConfig DEFAULTFLIGHTPLAN = AssetConfig.ForType<KramaxAutoPilot>(flightPlansNodeName, "DefaultFlightPlans.cfg");
-        public readonly PluginConfig FLIGHTPLAN = PluginConfig.ForType<KramaxAutoPilot>(flightPlansNodeName, "_FlightPlans.cfg");
+		private const string DEFAULT_FLIGHTPLAN_NODENAME = "KramaxAutoPilotPlansDefault";
+        private const string FLIGHTPLAN_NODENAME = "KramaxAutoPilotPlans";
+        public readonly AssetConfig DEFAULT_FLIGHTPLANS = AssetConfig.ForType<KramaxAutoPilot>(DEFAULT_FLIGHTPLAN_NODENAME, "DefaultFlightPlans.cfg");
+        public readonly PluginConfig USER_FLIGHTPLANS = PluginConfig.ForType<KramaxAutoPilot>(FLIGHTPLAN_NODENAME, "_FlightPlans.cfg");
 
         public void StartFlightPlanManager()
         {
@@ -3691,6 +3696,7 @@ namespace Kramax
                         if (flightPlansDict.TryGetValue(planet.name, out plans))
                         {
                             Deb.Log("UpdateFlightPlans: got plans for planet {0}", planet.name);
+							plans.Sort();
                         }
                     }
                     else
@@ -3714,6 +3720,7 @@ namespace Kramax
                 if (flightPlansDict.TryGetValue(planet_name, out fplist))
                 {
                     Deb.Log("LoadPlansFromNode: fplist for planet {0} already exists.", planet_name);
+					fplist.Sort();
                 }
                 else
                 {
@@ -3744,39 +3751,80 @@ namespace Kramax
             }
         }
 
-        private void LoadPlansFromSingleFile(ConfigNode root)
+        private void LoadPlansFromSingleFile(ConfigNode node)
         {
-            foreach (ConfigNode node in root.nodes)
+            Deb.Log("LoadPlansFromFile: tl node {0}", node.name);
+            LoadPlansFromNode(node);
+
+            // try to update the in game nodes to ours
+            // this will only be done for the non-default nodes
+            if (node.name == FLIGHTPLAN_NODENAME)
             {
-                Deb.Log("LoadPlansFromFile: tl node {0}", node.name);
-                LoadPlansFromNode(node);
+                Deb.Log("LoadPlansFromFile: try to update ingame nodes...");
 
-                // try to update the in game nodes to ours
-                // this will only be done for the non-default nodes
-                if (node.name == flightPlansNodeName)
+                foreach (ConfigNode enode in GameDatabase.Instance.GetConfigNodes(FLIGHTPLAN_NODENAME))
                 {
-                    Deb.Log("LoadPlansFromFile: try to update ingame nodes...");
+                    enode.ClearNodes();
+                    enode.ClearData();
 
-                    foreach (ConfigNode enode in GameDatabase.Instance.GetConfigNodes(flightPlansNodeName))
-                    {
-                        enode.ClearNodes();
-                        enode.ClearData();
-
-                        node.CopyTo(enode);
-                        // Deb.Log("LoadPlansFromFile: in game node now {0}", enode.ToString());
-                    }
-                    Deb.Log("LoadPlansFromFile: done.");
+                    node.CopyTo(enode);
+                    Deb.Log("LoadPlansFromFile: in game node now {0}", enode.ToString());
                 }
+                Deb.Log("LoadPlansFromFile: done.");
             }
         }
 
         private void LoadPlansFromFiles()
-        {
+        {	        
             flightPlansDict.Clear();
-            LoadPlansFromSingleFile(DEFAULTFLIGHTPLAN.Load().Node);
-			if (FLIGHTPLAN.IsLoadable)
-                LoadPlansFromSingleFile(FLIGHTPLAN.Load().Node);
-
+			{
+				Deb.Log("Loading {0}...", "DefaultFlightPlans.cfg");
+				LoadPlansFromSingleFile(DEFAULT_FLIGHTPLANS.Load().Node);
+			}
+			{
+				string[] files = AssetConfig.ListForType<KramaxAutoPilot>("*.cfg", true);
+				Deb.Log("Found {0} additional Flight Plan files on GameData assets.", files.Length -1);
+				for (int i = files.Length; --i >= 0;)
+				{
+					if (files[i] == DEFAULT_FLIGHTPLANS.KspPath)
+						continue;
+					Deb.Log("Loading {0}...", files[i]);
+					AssetConfig plan = AssetConfig.ForType<KramaxAutoPilot>(DEFAULT_FLIGHTPLAN_NODENAME, files[i]);
+					if (plan.IsLoadable) try
+					{
+						LoadPlansFromSingleFile(plan.Load().Node);
+					} catch (Exception e)
+					{
+						Deb.Err("FlightPlan {0} could not be read due {1}.", plan.KspPath, e.Message);
+					}
+				}
+			}
+			{
+				string[] files = PluginConfig.ListForType<KramaxAutoPilot>("*.cfg", true);
+				Deb.Log("Found {0} Flight Plan files on User's PluginData assets", files.Length);
+				for (int i = files.Length; --i >= 0;)
+				{
+					if (files[i].StartsWith("_")) continue;
+					Deb.Log("Loading {0}...", files[i]);
+					PluginConfig plan = PluginConfig.ForType<KramaxAutoPilot>(FLIGHTPLAN_NODENAME, files[i]);
+					if (plan.IsLoadable) try
+					{
+						LoadPlansFromSingleFile(plan.Load().Node);
+					} catch (Exception e)
+					{
+						Deb.Err("FlightPlan {0} could not be read due {1}.", plan.KspPath, e.Message);
+					}
+				}
+			}
+			
+			if (USER_FLIGHTPLANS.IsLoadable) try
+			{
+				LoadPlansFromSingleFile(USER_FLIGHTPLANS.Load().Node);
+			} catch (Exception e)
+			{
+				Deb.Err("User's Flight Plans {0} could not be read due {1}.", USER_FLIGHTPLANS.KspPath, e.Message);
+			}
+			
             planet = vessel.mainBody;
 
             if (planet != null)
@@ -3784,6 +3832,7 @@ namespace Kramax
                 if (flightPlansDict.TryGetValue(planet.name, out plans))
                 {
                     Deb.Log("LoadPlansFromFile: got plans for planet {0}", planet.name);
+					plans.Sort();
                 }
             }
         }
@@ -3800,8 +3849,8 @@ namespace Kramax
         private void LoadPlansFromConfig()
         {
             flightPlansDict.Clear();
-            LoadPlansFromConfigNamed(defFlightPlansNodeName);
-            LoadPlansFromConfigNamed(flightPlansNodeName);
+            LoadPlansFromConfigNamed(DEFAULT_FLIGHTPLAN_NODENAME);
+            LoadPlansFromConfigNamed(FLIGHTPLAN_NODENAME);
         }
 
         public void ApplyPlan(FlightPlan plan)
@@ -3865,7 +3914,7 @@ namespace Kramax
 
             ConfigNode rootNode = new ConfigNode();
 
-            ConfigNode node = rootNode.AddNode(flightPlansNodeName);
+            ConfigNode node = rootNode.AddNode(FLIGHTPLAN_NODENAME);
 
             // plan_list will be key/value pair
             foreach (var pair in flightPlansDict)
@@ -3878,7 +3927,7 @@ namespace Kramax
                 }
             }
 
-			FLIGHTPLAN.Save(rootNode);
+			USER_FLIGHTPLANS.Save(rootNode);
         }
 
         private void DisplayFlightPlanManagerWindow(int id)
@@ -3899,12 +3948,12 @@ namespace Kramax
 
             GUI.backgroundColor = GeneralUI.ActiveBackground;
 
-            if (GUILayout.Button(new GUIContent("Refresh", "Reload from " + FLIGHTPLAN.KspPath),
+            if (GUILayout.Button(new GUIContent("Refresh", "Reload from " + System.IO.Path.GetDirectoryName(USER_FLIGHTPLANS.KspPath)),
                                  GUILayout.Width(100),
                                  GUILayout.Height(22)))
             {
                 LoadPlansFromFiles();
-                GeneralUI.postMessage("Flight plans reloaded from FlightPlans.cfg");
+                GeneralUI.postMessage("Flight plans reloaded!");
             }
 
             // reset colour
