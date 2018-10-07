@@ -3970,7 +3970,7 @@ namespace Kramax
             var f2w = 175;
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label(String.Format("Planet:", GUILayout.Width(f1w)));
+            GUILayout.Label("Planet:", GUILayout.Width(f1w));
             GUILayout.Label(planet == null ? "<none>" : planet.name,
                             GeneralUI.UISkin.customStyles[(int)myStyles.greenTextBox],
                             GUILayout.Width(f2w));
