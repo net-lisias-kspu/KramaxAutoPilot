@@ -68,8 +68,8 @@ This plugin is a heavily modified version of "Pilot Assistant" by Crzyrndm (<htt
 
 In addition, Kramer drew heavily on algorithms for calculating great circle routes from <http://www.movable-type.co.uk/scripts/latlong.html>. Many thanks for that information.
 
-### License
-This work is licensed under the [CC BY-NC-SA 4.0](https://creatLICENSE):
+### Licensing
+This work is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). See [here](./LICENSE).
 
 + You are free to:
 	- Share : copy and redistribute the material in any medium or format
