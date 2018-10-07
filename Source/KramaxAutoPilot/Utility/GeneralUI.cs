@@ -195,8 +195,8 @@ namespace Kramax.Utility
         {
             GUILayout.BeginHorizontal();
 
-            var val = old_val;
-            var boxText = val.ToString(nFormat);
+			double val = old_val;
+			string boxText = val.ToString(nFormat);
             string text = GUILayout.TextField(boxText, UISkin.customStyles[(int)myStyles.numBoxText], GUILayout.Width(boxWidth));
 
             inc_dec_pressed = false;

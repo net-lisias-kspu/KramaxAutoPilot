@@ -15,7 +15,7 @@ namespace KramaxReloadExtensions
     {
         public MonoBehaviour AddComponentToObject(Type type, GameObject aGameObject)
         {
-            var result = aGameObject.AddComponent(type) as MonoBehaviour;
+			MonoBehaviour result = aGameObject.AddComponent(type) as MonoBehaviour;
             return result;
         }
 

@@ -112,9 +112,9 @@ namespace Kramax.PID
                 previous = input;
             }
 
-            var prop_error = proportionalError(error);
-            var sum_error = integralError(error, useIntegral);
-            var delta_error = derivativeError(input);
+			double prop_error = proportionalError(error);
+			double sum_error = integralError(error, useIntegral);
+			double delta_error = derivativeError(input);
 
             Deb.Log("ResponseD: sum={0:F2}, P:{1:F2}, I:{2:F2}, D:{3:F2}", 
                 sum, prop_error, sum_error, delta_error);

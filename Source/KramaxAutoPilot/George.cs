@@ -244,7 +244,7 @@ namespace Kramax
         {
             String sflags = "";
 
-            foreach (var enval in Enum.GetValues(typeof(WPFlag)).Cast<WPFlag>())
+            foreach (WPFlag enval in Enum.GetValues(typeof(WPFlag)).Cast<WPFlag>())
             {
                 if (HasFlag(enval))
                 {
@@ -261,7 +261,7 @@ namespace Kramax
         {
             ConfigNode result = new ConfigNode("WayPoint");
 
-            foreach (var enval in Enum.GetValues(typeof(WPFlag)).Cast<WPFlag>())
+            foreach (WPFlag enval in Enum.GetValues(typeof(WPFlag)).Cast<WPFlag>())
             {
                 // we do not want to store some info
                 if (enval == WPFlag.Flown) continue;
@@ -283,7 +283,7 @@ namespace Kramax
         {
             flags = 0;
 
-            foreach (var enval in Enum.GetValues(typeof(WPFlag)).Cast<WPFlag>())
+            foreach (WPFlag enval in Enum.GetValues(typeof(WPFlag)).Cast<WPFlag>())
             {
                 if (node.GetValue(enval.ToString()) == "true")
                     SetFlag(enval);
@@ -330,7 +330,7 @@ namespace Kramax
 
         static public double ToDegrees(double angle)
         {
-            var result = (180.0 / Math.PI) * angle;
+			double result = (180.0 / Math.PI) * angle;
 
             if (result < 0)
                 result += 360.0;
@@ -345,22 +345,22 @@ namespace Kramax
                                               out double bearing,
                                               out double distance)
         {
-            // what if point 1 and 2 are coincident? fixme
-            var R = planet.Radius; // metres
-            var phi1 = lat1;
-            var phi2 = lat2;
-            var dPhi = lat2 - lat1;
-            var dLambda = lon2 - lon1;
+			// what if point 1 and 2 are coincident? fixme
+			double R = planet.Radius; // metres
+			double phi1 = lat1;
+			double phi2 = lat2;
+			double dPhi = lat2 - lat1;
+			double dLambda = lon2 - lon1;
 
-            var a = Math.Sin(dPhi / 2) * Math.Sin(dPhi / 2) +
+			double a = Math.Sin(dPhi / 2) * Math.Sin(dPhi / 2) +
                     Math.Cos(phi1) * Math.Cos(phi2) *
                     Math.Sin(dLambda / 2) * Math.Sin(dLambda / 2);
-            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+			double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
             distance = R * c;
 
-            var y = Math.Sin(dLambda) * Math.Cos(phi2);
-            var x = Math.Cos(phi1) * Math.Sin(phi2) -
+			double y = Math.Sin(dLambda) * Math.Cos(phi2);
+			double x = Math.Cos(phi1) * Math.Sin(phi2) -
                     Math.Sin(phi1) * Math.Cos(phi2) * Math.Cos(dLambda);
             bearing = Math.Atan2(y, x);
         }
@@ -402,7 +402,7 @@ namespace Kramax
 
             BearingAndDistanceRad(planet, rlat1, rlon1, rlat3, rlon3, out b13, out d13);
 
-            var dA13 = d13 / R;
+			double dA13 = d13 / R;
 
             double b12;
             double d12;
@@ -458,14 +458,14 @@ namespace Kramax
             // valid range.
             cs.fraction = cs.distanceTraveled / cs.courseDistance;
 
-            var a = Math.Cos(rlat1) * Math.Cos(rlat2);
-            var dA12 = cs.courseDistance / R;
-            var b = Math.Sin(cs.distanceTraveled / R) / Math.Sin(dA12);
-            var x = a * Math.Cos(rlat1) * Math.Cos(rlon1) + b * Math.Cos(rlat2) * Math.Cos(rlon2);
-            var y = a * Math.Cos(rlat1) * Math.Sin(rlon1) + b * Math.Cos(rlat2) * Math.Sin(rlon2);
-            var z = a * Math.Sin(rlat1) + b * Math.Sin(rlat2);
-            var rlat_i = Math.Atan2(z, Math.Sqrt(x * x + y * y));
-            var rlon_i = Math.Atan2(y, x);
+			double a = Math.Cos(rlat1) * Math.Cos(rlat2);
+			double dA12 = cs.courseDistance / R;
+            double b = Math.Sin(cs.distanceTraveled / R) / Math.Sin(dA12);
+            double x = a * Math.Cos(rlat1) * Math.Cos(rlon1) + b * Math.Cos(rlat2) * Math.Cos(rlon2);
+            double y = a * Math.Cos(rlat1) * Math.Sin(rlon1) + b * Math.Cos(rlat2) * Math.Sin(rlon2);
+            double z = a * Math.Sin(rlat1) + b * Math.Sin(rlat2);
+            double rlat_i = Math.Atan2(z, Math.Sqrt(x * x + y * y));
+            double rlon_i = Math.Atan2(y, x);
 
             double ri2, di2; // di2 should match curentDistance
             BearingAndDistanceRad(planet, rlat_i, rlon_i, rlat2, rlon2, out ri2, out di2);
@@ -487,7 +487,7 @@ namespace Kramax
                 return;
             }
 
-            var frac = Utils.Clamp(cs.fraction, 0, 1);
+			double frac = Utils.Clamp(cs.fraction, 0, 1);
 
             cs.currentAltitude = alt2 * frac + alt1 * (1.0 - frac);
             cs.dVt = alt3 - cs.currentAltitude;
@@ -521,11 +521,11 @@ namespace Kramax
 				planet = planet
 			};
 
-            WayPoint prev_wp = null;
+			WayPoint prev_wp = null;
 
-            foreach (var wp in course)
+            foreach (WayPoint wp in course)
             {
-                var new_wp = wp.Clone();
+				WayPoint new_wp = wp.Clone();
 
                 if (prev_wp != null)
                     prev_wp.next = new_wp;
@@ -546,7 +546,7 @@ namespace Kramax
             if (name == null)
                 return null;
 
-            foreach (var body in FlightGlobals.Bodies)
+            foreach (CelestialBody body in FlightGlobals.Bodies)
             {
                 if (name == body.name)
                     return body;
@@ -560,7 +560,7 @@ namespace Kramax
 
             ConfigNode courseNode = result.AddNode("WayPoints");
 
-            foreach (var wp in course)
+            foreach (WayPoint wp in course)
             {
                 if (wp.HasFlag(WPFlag.Current))
                     continue; // do not store current waypoints
@@ -583,13 +583,13 @@ namespace Kramax
 
             course.Clear();
 
-            var courseNode = node.GetNode("WayPoints");
+			ConfigNode courseNode = node.GetNode("WayPoints");
 
             if (courseNode != null)
             {
-                foreach (var wp_node in courseNode.GetNodes("WayPoint"))
+                foreach (ConfigNode wp_node in courseNode.GetNodes("WayPoint"))
                 {
-                    var wp = new WayPoint();
+					WayPoint wp = new WayPoint();
                     wp.SetFromConfigNode(wp_node);
                     course.Add(wp);
                 }
@@ -681,7 +681,7 @@ namespace Kramax
 
             planet = vessel.mainBody;
 
-            var nextNext = next.next;
+			WayPoint nextNext = next.next;
 
             // do not skip over courses that we have never been on
             // otherwise it can auto-sequence through a whole series of things that
@@ -722,13 +722,13 @@ namespace Kramax
                                 position.lat, position.lon,
                                 nextStatus);
 
-                var remaining = courseStatus.currentDistance;
-                var speed = vessel.srfSpeed;
+				double remaining = courseStatus.currentDistance;
+				double speed = vessel.srfSpeed;
 
                 if (speed > 0)
                 {
-                    var timeToNext = remaining / speed;
-                    var turnAmount = Math.Abs(nextStatus.courseBearing - courseStatus.courseBearing);
+					double timeToNext = remaining / speed;
+					double turnAmount = Math.Abs(nextStatus.courseBearing - courseStatus.courseBearing);
 
                     // deal with 350-10
                     if (turnAmount > 180)
@@ -736,9 +736,9 @@ namespace Kramax
                         turnAmount = 360 - turnAmount;
                     }
 
-                    // estimate turn time
-                    var turnRate = 3; // 3 degrees per second gives standard rate turn, should get from vessel
-                    var timeToTurn = turnAmount / turnRate;
+					// estimate turn time
+					int turnRate = 3; // 3 degrees per second gives standard rate turn, should get from vessel
+					double timeToTurn = turnAmount / turnRate;
 
                     if (timeToNext < timeToTurn)
                     {
@@ -772,7 +772,7 @@ namespace Kramax
             if (Double.IsNaN(courseStatus.courseSlope))
                 return 0; // maybe return NaN; fixme
 
-            var speed = vessel.srfSpeed;
+			double speed = vessel.srfSpeed;
 
             if (speed > 0)
             {
@@ -791,55 +791,55 @@ namespace Kramax
         // what descent rate do we need to get to glideslope based on current state
         public double RequiredDescentRate(Vessel vessel, VesselData vesselData)
         {
-            var speed = vessel.srfSpeed;
-            var error = courseStatus.dVt;
+			double speed = vessel.srfSpeed;
+			double error = courseStatus.dVt;
 
-            // we know the optimal descent slope from courseStatus
-            // that would give us a nominal descent rate
-            // if we are high we need a higher descent rate
-            // if low we need lower descent rate
-            // D = distance from glideslope
-            // T = time in future
-            // GS = glide slope 
-            // V = descent rate
-            // GV = descent rate for glide slope
-            // S = speed (assume constant)
-            // In T time we will travel about S * T
-            // Traveling S * T the slope will drop (S*T) * GS
-            // In time T will will drop T * V meters
-            // We want (S*T)*GS to match (T*V)
-            // or (S*T*GS) == (T*V) or
-            // S*GS = GV
-            // But we are D above glideslope so need to drop extra D in time T
-            // 
-            // If glideslope at our position is A, then our altitude is A+D
-            // We want to get to an altitude in time T of A + T * (S*GS)
-            // so (A+D)+T*V == A + T * (S*GS)
-            // A+D+T*V == A + T * S * GS
-            // D+T*V = T*S*GS
-            // T*V = T*S*GS-D
-            // V = S*GS - D/T
-            // So to get there in 10 seconds we need to subtract D/10 from optimal glide slope rate
+			// we know the optimal descent slope from courseStatus
+			// that would give us a nominal descent rate
+			// if we are high we need a higher descent rate
+			// if low we need lower descent rate
+			// D = distance from glideslope
+			// T = time in future
+			// GS = glide slope 
+			// V = descent rate
+			// GV = descent rate for glide slope
+			// S = speed (assume constant)
+			// In T time we will travel about S * T
+			// Traveling S * T the slope will drop (S*T) * GS
+			// In time T will will drop T * V meters
+			// We want (S*T)*GS to match (T*V)
+			// or (S*T*GS) == (T*V) or
+			// S*GS = GV
+			// But we are D above glideslope so need to drop extra D in time T
+			// 
+			// If glideslope at our position is A, then our altitude is A+D
+			// We want to get to an altitude in time T of A + T * (S*GS)
+			// so (A+D)+T*V == A + T * (S*GS)
+			// A+D+T*V == A + T * S * GS
+			// D+T*V = T*S*GS
+			// T*V = T*S*GS-D
+			// V = S*GS - D/T
+			// So to get there in 10 seconds we need to subtract D/10 from optimal glide slope rate
 
-            if (speed <= 0)
-                return 0;
+			if (speed <= 0)
+				return 0;
 
-            if (!Double.IsNaN(error) && !Double.IsNaN(courseStatus.courseSlope))
-            {
-                var nominalRate = courseStatus.courseSlope * speed;
-                var timeToIntercept = 5;
-                var adjust = (-error / timeToIntercept);
-                // if adjust is negative we will be going faster and so in fact we need more delta
-                // if positive we will be going slower so need less
-                var up_fudge = 0.8;
-                var down_fudge = 1.2;
+			if (!Double.IsNaN(error) && !Double.IsNaN(courseStatus.courseSlope))
+			{
+				double nominalRate = courseStatus.courseSlope * speed;
+				int timeToIntercept = 5;
+				double adjust = (-error / timeToIntercept);
+				// if adjust is negative we will be going faster and so in fact we need more delta
+				// if positive we will be going slower so need less
+				double up_fudge = 0.8;
+				double down_fudge = 1.2;
 
-                if (adjust < 0)
-                    adjust = adjust * down_fudge;
-                else
-                    adjust = adjust * up_fudge;
+				if (adjust < 0)
+					adjust = adjust * down_fudge;
+				else
+					adjust = adjust * up_fudge;
 
-                var result = nominalRate + adjust;
+				double result = nominalRate + adjust;
 
                 // Deb.Log("RequiredDescentRate: slp {5}, nom {0}, T {1}, error {2}, adj {3}, result {4}",
                 //    nominalRate, timeToIntercept, error, adjust, result, courseStatus.courseSlope, speed);
@@ -863,7 +863,7 @@ namespace Kramax
             if (planet == null)
                 return;
 
-            var after = wp.next;
+			WayPoint after = wp.next;
 
             Deb.Log("UpdateWayPoint: {0}, next={1}", wp, after);
 
@@ -877,7 +877,7 @@ namespace Kramax
 
         public void UpdateWayPointValues(CelestialBody planet)
         {
-            foreach (var wp in course)
+            foreach (WayPoint wp in course)
             {
                 UpdateWayPoint(planet, wp);
             }
@@ -885,8 +885,8 @@ namespace Kramax
 
         public void AppendWayPoint(WayPoint wp)
         {
-            var last = course.LastOrDefault();
-            var clone = wp.Clone();
+			WayPoint last = course.LastOrDefault();
+			WayPoint clone = wp.Clone();
 
             clone.ClearFlag(WPFlag.Active);
             clone.ClearFlag(WPFlag.Flown);
@@ -911,7 +911,7 @@ namespace Kramax
             position.alt = vessel.altitude;
             position.SetFlag(WPFlag.Current);
 
-            var start = position.Clone();
+			WayPoint start = position.Clone();
 
             start.ClearFlag(WPFlag.Active);
             start.SetFlag(WPFlag.Flown);
@@ -953,8 +953,8 @@ namespace Kramax
                 return;
             }
 
-            // need to copy all waypoints and prune out any "current" ones that are in the middle
-            var newCourse = new List<WayPoint>();
+			// need to copy all waypoints and prune out any "current" ones that are in the middle
+			List<WayPoint> newCourse = new List<WayPoint>();
             int ndx = -1;
             int j = 0; // in case we skip any
 
@@ -963,7 +963,7 @@ namespace Kramax
 
             for (int i = 0; i < course.Count; i++)
             {
-                var wp = course[i];
+				WayPoint wp = course[i];
 
                 if (System.Object.ReferenceEquals(wp, awp))
                 {
@@ -975,7 +975,7 @@ namespace Kramax
                 if (i > 0 && wp.HasFlag(WPFlag.Current))
                     continue;
 
-                var newWp = wp.Clone();
+				WayPoint newWp = wp.Clone();
 
                 if (prev_wp != null)
                 {
@@ -997,7 +997,7 @@ namespace Kramax
             // everything before active wp should be marked flown and inactive
             for (int i = 0; i < ndx; i++)
             {
-                var wp = newCourse[i];
+				WayPoint wp = newCourse[i];
 
                 wp.SetFlag(WPFlag.Flown);
                 wp.ClearFlag(WPFlag.Active);
@@ -1006,7 +1006,7 @@ namespace Kramax
             // everything after active wp should be marked inactive and NOT flown
             for (int i = ndx; i < newCourse.Count; i++)
             {
-                var wp = newCourse[i];
+				WayPoint wp = newCourse[i];
 
                 wp.ClearFlag(WPFlag.Flown);
                 wp.ClearFlag(WPFlag.Active);
@@ -1034,7 +1034,7 @@ namespace Kramax
                 // insert a fake waypoint for our current position
                 course = newCourse;
 
-                var current = position.Clone();
+				WayPoint current = position.Clone();
                 current.SetFlag(WPFlag.Vertical);
                 current.SetFlag(WPFlag.Flown);
                 current.SetFlag(WPFlag.Current);
@@ -1067,7 +1067,7 @@ namespace Kramax
 
             next.SetFlag(WPFlag.Flown);
 
-            var nextNext = next.next;
+			WayPoint nextNext = next.next;
 
             if (nextNext == null)
                 return;
@@ -1299,7 +1299,7 @@ namespace Kramax
                                        WPFlag flagc = 0,
                                        WPFlag flagd = 0)
         {
-            var wp = new WayPoint();
+			WayPoint wp = new WayPoint();
 
             wp.lat = lat;
             wp.lon = lon;
@@ -1335,7 +1335,7 @@ namespace Kramax
 
             StartFlightPlanManager();
 
-            var comp = AddComponent(typeof(CDI));
+			UnityEngine.MonoBehaviour comp = AddComponent(typeof(CDI));
 
             Deb.Log("George: Start: CDI add component result is {0}", comp);
 
@@ -1441,8 +1441,8 @@ namespace Kramax
                 Deb.Log("George.switchVessels: new vessel is not active one or EVA, ignore.");
                 return;
             }
-            
-            var lastVessel = vessel;
+
+			Vessel lastVessel = vessel;
 
             vessel = v;
 
@@ -1577,13 +1577,13 @@ namespace Kramax
                 hdg += hrztScale * scale * GameSettings.AXIS_YAW.GetAxis();
                 if (CurrentHrztMode == HrztMode.Bank)
                 {
-                    var ctrl = aileronCtrl;
+					APController ctrl = aileronCtrl;
                     ctrl.SetPoint = Utils.headingClamp(ctrl.SetPoint + hdg / 4, 180);
                     targetHeading = ctrl.SetPoint;
                 }
                 else
                 {
-                    var ctrl = hdgBankCtrl;
+					APController ctrl = hdgBankCtrl;
                     ctrl.SetPoint = (ctrl.SetPoint + hdg).headingClamp(360);
                     targetHeading = ctrl.SetPoint;
                 }
@@ -1597,25 +1597,25 @@ namespace Kramax
 
                 if (CurrentVertMode == VertMode.Altitude || CurrentVertMode == VertMode.RadarAltitude)
                 {
-                    var ctrl = altCtrl;
+					APController ctrl = altCtrl;
                     ctrl.SetPoint = Math.Max(ctrl.SetPoint + vert * 10, 0);
                     targetVert = ctrl.SetPoint;
                 }
                 else if (CurrentVertMode == VertMode.VSpeed)
                 {
-                    var ctrl = vertSpeedCtrl;
+					APController ctrl = vertSpeedCtrl;
                     ctrl.SetPoint += vert;
                     targetVert = ctrl.SetPoint;
                 }
                 else if (CurrentVertMode == VertMode.Pitch)
                 {
-                    var ctrl = elevCtrl;
+					APController ctrl = elevCtrl;
                     ctrl.SetPoint = Utils.Clamp(ctrl.SetPoint + vert, -90, 90);
                     targetVert = ctrl.SetPoint;
                 }
                 else if (CurrentVertMode == VertMode.Glideslope)
                 {
-                    var ctrl = vertSpeedCtrl;
+					APController ctrl = vertSpeedCtrl;
                     ctrl.SetPoint += vert;
                     targetVert = ctrl.SetPoint;
                 }
@@ -1630,13 +1630,13 @@ namespace Kramax
 
                 if (CurrentThrottleMode == ThrottleMode.Speed)
                 {
-                    var ctrl = speedCtrl;
+					APController ctrl = speedCtrl;
                     ctrl.SetPoint = Math.Max(ctrl.SetPoint + speed, 0);
                     targetSpeed = ctrl.SetPoint;
                 }
                 else
                 {
-                    var ctrl = accelCtrl;
+					APController ctrl = accelCtrl;
                     ctrl.SetPoint += speed / 10;
                     targetSpeed = ctrl.SetPoint;
                 }
@@ -1732,7 +1732,7 @@ namespace Kramax
 
                             hdgBankCtrl.SetPoint = flightPlan.CourseHeading();
 
-                            var vC = flightPlan.courseStatus.vC;
+							double vC = flightPlan.courseStatus.vC;
 
                             // try to avoid super sharp course corrections
                             if (Double.IsNaN(vC))
@@ -1998,9 +1998,9 @@ namespace Kramax
                     {                                     
                         // timeFactor is how long in future we WANT to intercept course
                         double timeFactor = 10;
-                        var dXt = flightPlan.courseStatus.dXt;
-                        var vXt = flightPlan.courseStatus.vXt;
-                        var vC = flightPlan.courseStatus.vC;
+						double dXt = flightPlan.courseStatus.dXt;
+						double vXt = flightPlan.courseStatus.vXt;
+						double vC = flightPlan.courseStatus.vC;
 
                         if (Double.IsNaN(dXt) || Double.IsNaN(vXt) || Double.IsNaN(vC))
                         {
@@ -2021,7 +2021,7 @@ namespace Kramax
                             // double closingFactor = vC / Math.Max(Math.Abs(vXt), 0.000000000000001);
 
                             double hdgBankResponse;
-                            var velocity = vessel.srfSpeed;
+							double velocity = vessel.srfSpeed;
 
                             // handle going wrong way, going at sharp angle to course or craft is not moving
                             if (velocity < 0.05)
@@ -2079,12 +2079,12 @@ namespace Kramax
                             {
                                 hdgBankResponse = Utils.Clamp(hdgBankResponse, -20.0, 20.0);
 
-                                var rudderAngle = -hdgBankResponse*0.2;
+								double rudderAngle = -hdgBankResponse*0.2;
 
                                 aileronCtrl.SetPoint = 0;
                                 rudderCtrl.SetPoint = rudderAngle;
 
-                                var yaw_rate = rudderCtrl.ResponseF(vesselData.yaw, useIntegralYaw).Clamp(-1, 1);
+                                float yaw_rate = rudderCtrl.ResponseF(vesselData.yaw, useIntegralYaw).Clamp(-1, 1);
                                 Deb.Log("Hrzt: landed, Vc={0:F1} vXt={1:F1} dXt={2:F1} hbr={3:F2} rudder={4:F2} rate={5:F2} yaw={6:F2}", 
                                         vC, vXt, dXt, hdgBankResponse, rudderAngle, yaw_rate, vesselData.yaw);
                             }
@@ -2155,7 +2155,7 @@ namespace Kramax
                                         -vessel.srfSpeed * 0.9, vessel.srfSpeed * 0.9);
                     }
 
-                    var esp = vertSpeedCtrl.ResponseD(vesselData.vertSpeed, useIntegral);
+                    double esp = vertSpeedCtrl.ResponseD(vesselData.vertSpeed, useIntegral);
 
                     if (Math.Abs(vesselData.bank) > 90)
                         esp = -esp; // flying upside down
@@ -2166,7 +2166,7 @@ namespace Kramax
                 }
                 else if (CurrentVertMode == VertMode.Pitch)
                 {
-                    var pitch_rate = elevCtrl.ResponseF(vesselData.pitch, useIntegral);
+                    float pitch_rate = elevCtrl.ResponseF(vesselData.pitch, useIntegral);
 
                     if (Math.Abs(vesselData.bank) > 90)
                     {
@@ -2190,7 +2190,7 @@ namespace Kramax
                             case LandingMode.ToIAF:
                             case LandingMode.ToFAF:
                             case LandingMode.Final:
-                                var drate = flightPlan.RequiredDescentRate(vessel, vesselData);
+                                double drate = flightPlan.RequiredDescentRate(vessel, vesselData);
 
                                 if (Double.IsNaN(drate))
                                 {
@@ -2212,7 +2212,7 @@ namespace Kramax
                                 }
                                 else
                                 {
-                                    var vsp = -(vesselData.radarAlt * 0.5);
+                                    double vsp = -(vesselData.radarAlt * 0.5);
                                     vertSpeedCtrl.SetPoint = Utils.Clamp(vsp, -6.0, 0.0);
 
                                     Deb.Log("VertMode: touching down from {2:F1}, pitch {4:F2}, hsp {3:F0} with vsp {0} (clamped {1})",
@@ -2498,7 +2498,7 @@ namespace Kramax
 
         private static String FormatLonNum(double lon)
         {
-            var x = lon;
+            double x = lon;
 
             if (x < 0)
             {
@@ -2509,7 +2509,7 @@ namespace Kramax
 
         private static String FormatLon(double lon, String format = "{0:F3}")
         {
-            var x = lon;
+            double x = lon;
 
             if (x < -180)
                 x += 360;
@@ -2534,13 +2534,13 @@ namespace Kramax
 
         private static String FormatLatNum(double lat)
         {
-            var x = lat;
+            double x = lat;
             return String.Format("{0:F3}°", x);
         }
 
         private static String FormatLat(double lat, String format = "{0:F3}")
         {
-            var x = lat;
+            double x = lat;
 
             String fmt = format + "°";
 
@@ -2642,7 +2642,7 @@ namespace Kramax
         {
             GUILayout.BeginHorizontal();
 
-            var i = 0;
+            int i = 0;
 
             drawFieldHeader("Leg", i++);
             drawFieldHeader(" Loc", i++);
@@ -2668,7 +2668,7 @@ namespace Kramax
 
             GUILayout.BeginHorizontal();
 
-            var i = 0;
+            int i = 0;
 
             if (wp.HasFlag(WPFlag.Active))
             {
@@ -2688,8 +2688,8 @@ namespace Kramax
             }
             else
             {
-                var lat = FormatLat(wp.lat, "{0:F2}");
-                var lon = FormatLon(wp.lon, "{0:F2}");
+                string lat = FormatLat(wp.lat, "{0:F2}");
+                string lon = FormatLon(wp.lon, "{0:F2}");
                 drawField(String.Format("{0} {1}", lat, lon), i++, true);
             }
 
@@ -2727,7 +2727,7 @@ namespace Kramax
 
         private void displayWindow(int id)
         {
-            var panelWidth = 330;
+            float panelWidth = 330;
 
             GUILayout.BeginHorizontal();
 
@@ -3292,14 +3292,14 @@ namespace Kramax
 
                 GUILayout.EndHorizontal();
 
-                var f23w = 65;
-                var f4w = 120;
+                float f23w = 65;
+                float f4w = 120;
 
                 GUILayout.BeginHorizontal();
 
                 GUILayout.Label("Appr Mode:", GUILayout.Width(80));
 
-                var lmode = "none";
+                string lmode = "none";
 
                 if (vessel.checkLanded())
                 {
@@ -3370,7 +3370,7 @@ namespace Kramax
                 {
                     drawWayPointHeader();
 
-                    foreach (var wp in flightPlan.course)
+                    foreach (WayPoint wp in flightPlan.course)
                     {
                         drawWayPoint(wp);
                     }
@@ -3425,9 +3425,9 @@ namespace Kramax
 
             if (bShowLandingSpeeds)
             {
-                // fields to enter approach speeds
-                var setBtnWidth = 118;
-                var textFieldWidth = 88;
+				// fields to enter approach speeds
+				int setBtnWidth = 118;
+				int textFieldWidth = 88;
 
                 bool update_button_pressed = false;
                 bool updated = false;
@@ -3518,7 +3518,7 @@ namespace Kramax
 
         private void drawPIDvalues(AsstList controllerid, string inputName, string inputUnits, double inputValue, int displayPrecision, string outputName, string outputUnits, bool invertOutput = false, bool showTarget = true)
         {
-            var controller = GetController(controllerid);
+			APController controller = GetController(controllerid);
 
             controller.bShow = GUILayout.Toggle(controller.bShow, string.Format("{0}: {1}{2}", inputName, inputValue.ToString("N" + displayPrecision.ToString()), inputUnits), GeneralUI.UISkin.customStyles[(int)myStyles.btnToggle], GUILayout.Width(200));
 
@@ -3713,7 +3713,7 @@ namespace Kramax
             {
                 Deb.Log("LoadPlansFromNode: list node {0}", listNode.name);
 
-                var planet_name = listNode.name;
+				string planet_name = listNode.name;
 
                 List<FlightPlan> fplist = null;
 
@@ -3897,7 +3897,7 @@ namespace Kramax
 
             bool plan_present = false;
 
-            foreach (var pplan in plans_for_planet)
+            foreach (FlightPlan pplan in plans_for_planet)
             {
                 if (System.Object.ReferenceEquals(plan, pplan))
                 {
@@ -3917,11 +3917,11 @@ namespace Kramax
             ConfigNode node = rootNode.AddNode(FLIGHTPLAN_NODENAME);
 
             // plan_list will be key/value pair
-            foreach (var pair in flightPlansDict)
+            foreach (KeyValuePair<string, List<FlightPlan>> pair in flightPlansDict)
             {
                 ConfigNode listNode = node.AddNode(pair.Key);
 
-                foreach (var aplan in pair.Value)
+                foreach (FlightPlan aplan in pair.Value)
                 {
                     listNode.AddNode(aplan.ToConfigNode());
                 }
@@ -3966,8 +3966,8 @@ namespace Kramax
 
             GUILayout.EndHorizontal();
 
-            var f1w = 120;
-            var f2w = 175;
+            float f1w = 120;
+            float f2w = 175;
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Planet:", GUILayout.Width(f1w));
@@ -4042,7 +4042,7 @@ namespace Kramax
             }
             else
             {
-                foreach (var fp in plans)
+                foreach (FlightPlan fp in plans)
                 {
                     if (GUILayout.Button(new GUIContent(fp.name, fp.description),
                                          GeneralUI.UISkin.customStyles[(int)myStyles.leftButtonText]))

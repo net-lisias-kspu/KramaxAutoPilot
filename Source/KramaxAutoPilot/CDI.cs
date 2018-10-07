@@ -53,8 +53,8 @@ namespace Kramax
                 int sy = 19;
                 int hy = 9;
 
-                var off = new Color(0, 0, 0, 0);
-                var on = new Color(1, 1, 1, 1);
+				Color off = new Color(0, 0, 0, 0);
+				Color on = new Color(1, 1, 1, 1);
                 
                 diamondTex = new Texture2D(sx, sy, TextureFormat.ARGB32, false);
 
@@ -155,11 +155,11 @@ namespace Kramax
 
         public void GetNavBallRect()
         {
-        	// ScreenSafeUI appears to no longer be used, so lets get out of here
-        	//if (ScreenSafeUI.referenceCam == null)
-        	//	return;
-        		
-            var navball = GameObject.FindObjectOfType<NavBall>();
+			// ScreenSafeUI appears to no longer be used, so lets get out of here
+			//if (ScreenSafeUI.referenceCam == null)
+			//	return;
+
+			NavBall navball = GameObject.FindObjectOfType<NavBall>();
 
             if (navball == null)
             {
@@ -170,11 +170,11 @@ namespace Kramax
             Deb.Log("Navball transform: {0}", navball.transform.localToWorldMatrix);
             Deb.Log("Navball transform.position: {0}", navball.transform.position);
 
-            // position is (1.0,0.1,0.0) when visible
-            // position is (1.0,-0.1,0.0) when not visible
-            //var camera = ScreenSafeUI.referenceCam;
-            
-            var camera = UIMasterController.Instance.appCanvas.worldCamera;
+			// position is (1.0,0.1,0.0) when visible
+			// position is (1.0,-0.1,0.0) when not visible
+			// Camera camera = ScreenSafeUI.referenceCam;
+
+			Camera camera = UIMasterController.Instance.appCanvas.worldCamera;
 
             // this looks to be the center of the ball with Y counting up from bottom of screen
             // so 800,85 for 1600x1200 screen.
@@ -237,8 +237,8 @@ namespace Kramax
                 clamped = true;
             }
 
-            var sx = rect.width;
-            var sy = rect.height;
+			float sx = rect.width;
+			float sy = rect.height;
 
             GUI.Box(new Rect(0, 0, sx, sy), "");
 
@@ -247,7 +247,7 @@ namespace Kramax
             float spacing = (float)Math.Floor(sx * 0.11f + 0.5f);
             float middle = (float)Math.Floor(sx * 0.5f + 0.5f);
 
-            var lineRect = new Rect(0, 3, 1, sy - 6);
+			Rect lineRect = new Rect(0, 3, 1, sy - 6);
 
             for (float x = middle + spacing; x < sx; x += spacing)
             {
@@ -269,15 +269,15 @@ namespace Kramax
 
             Drawing.DrawRect(lineRect, color);
 
-            // our box runs for 0 to sx-1
-            // we do not want diamond to get clipped
-            // so lowest y should be 0 and highest should be (sx-1)-9
-            // center should draw at middle - 4
-            var frac = -0.5f + (value - minV) / (maxV - minV); // range -0.5 to 0.5
-            var range = (sx - 1) - 9;
+			// our box runs for 0 to sx-1
+			// we do not want diamond to get clipped
+			// so lowest y should be 0 and highest should be (sx-1)-9
+			// center should draw at middle - 4
+			float frac = -0.5f + (value - minV) / (maxV - minV); // range -0.5 to 0.5
+			float range = (sx - 1) - 9;
             float xx = middle + range * frac - 4;
 
-            var dcolor = clamped ? XKCDColors.NeonRed : XKCDColors.NeonBlue;
+			Color dcolor = clamped ? XKCDColors.NeonRed : XKCDColors.NeonBlue;
             Drawing.DrawDiamond(new Rect(xx, 3, 9, 15), dcolor);
 
             GUI.EndGroup();
@@ -300,8 +300,8 @@ namespace Kramax
                 clamped = true;
             }
 
-            var sx = rect.width;
-            var sy = rect.height;
+			float sx = rect.width;
+			float sy = rect.height;
 
             GUI.Box(new Rect(0, 0, sx, sy), "");
 
@@ -309,7 +309,7 @@ namespace Kramax
 
             float spacing = (float)Math.Floor(sy * 0.11f + 0.5f);
             float middle = (float)Math.Floor(sy * 0.5f + 0.5f);
-            var lineRect = new Rect(3, 0, sx - 6, 1);
+			Rect lineRect = new Rect(3, 0, sx - 6, 1);
 
             for (float y = middle + spacing; y < sy; y += spacing)
             {
@@ -331,15 +331,15 @@ namespace Kramax
 
             Drawing.DrawRect(lineRect, color);
 
-            // our box runs for 0 to sy-1
-            // we do not want diamond to get clipped
-            // so lowest y should be 0 and highest should be (sy-1)-9
-            // center should draw at middle - 4
-            var frac = -0.5f + (value - minV) / (maxV - minV); // range -0.5 to 0.5
-            var range = (sy-1)-9;
+			// our box runs for 0 to sy-1
+			// we do not want diamond to get clipped
+			// so lowest y should be 0 and highest should be (sy-1)-9
+			// center should draw at middle - 4
+			float frac = -0.5f + (value - minV) / (maxV - minV); // range -0.5 to 0.5
+			float range = (sy-1)-9;
             float yy = middle + range*frac - 4;
 
-            var dcolor = clamped ? XKCDColors.NeonRed : XKCDColors.NeonBlue;
+			Color dcolor = clamped ? XKCDColors.NeonRed : XKCDColors.NeonBlue;
             Drawing.DrawDiamond(new Rect(3, yy, 15, 9), dcolor);
 
             GUI.EndGroup();
@@ -347,8 +347,8 @@ namespace Kramax
 
         private void DisplayCDI(int id)
         {
-            var width = window.width;
-            var height = window.height;
+			float width = window.width;
+			float height = window.height;
             float ctrl_width = width - 60;
             float ctrl_height = height - 80;
 
