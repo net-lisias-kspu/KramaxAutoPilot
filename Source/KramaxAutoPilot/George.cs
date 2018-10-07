@@ -213,15 +213,16 @@ namespace Kramax
         // does not clone next!
         public WayPoint Clone()
         {
-            var result = new WayPoint();
+			WayPoint result = new WayPoint
+			{
+				name = String.Copy(name),
+				flags = flags,
+				lat = lat,
+				lon = lon,
+				alt = alt
+			};
 
-            result.name = String.Copy(name);
-            result.flags = flags;
-            result.lat = lat;
-            result.lon = lon;
-            result.alt = alt;
-
-            return result;
+			return result;
         }
 
         public void ClearFlag(WPFlag f)
@@ -513,11 +514,12 @@ namespace Kramax
 
         public FlightPlan Clone()
         {
-            var result = new FlightPlan();
-
-            result.name = String.Copy(name);
-            result.description = String.Copy(description);
-            result.planet = planet;
+			FlightPlan result = new FlightPlan
+			{
+				name = String.Copy(name),
+				description = String.Copy(description),
+				planet = planet
+			};
 
             WayPoint prev_wp = null;
 
