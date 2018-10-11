@@ -8,8 +8,9 @@ This is Lisias' fork for Kramax Autopilot.
 ## In a Hurry
 
 * [Latest Release](https://github.com/net-lisias-ksp/KramaxAutoPilot/releases)
-    + [Binaries](https://github.com/net-lisias-ksp/KramaxAutoPilot/tree/Archive)
+* [Binaries](https://github.com/net-lisias-ksp/KramaxAutoPilot/tree/Archive)
 * [Source](https://github.com/net-lisias-ksp/KramaxAutoPilot)
+* [Issue Tracker](https://github.com/net-lisias-ksp/KramaxAutoPilot/issues)
 * Documentation	
 	+ [Homepage](http://ksp.lisias.net/add-ons/KramaxAutoPilot) on L Aerospace KSP Division
 	+ [Project's README](https://github.com/net-lisias-ksp/KramaxAutoPilot/blob/master/README.md)
@@ -68,8 +69,8 @@ This plugin is a heavily modified version of "Pilot Assistant" by Crzyrndm (<htt
 
 In addition, Kramer drew heavily on algorithms for calculating great circle routes from <http://www.movable-type.co.uk/scripts/latlong.html>. Many thanks for that information.
 
-### Licensing
-This work is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). See [here](./LICENSE).
+### License
+This work is licensed under the [CC BY-NC-SA 4.0](https://creatLICENSE):
 
 + You are free to:
 	- Share : copy and redistribute the material in any medium or format
