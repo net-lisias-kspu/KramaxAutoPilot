@@ -26,9 +26,9 @@ D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\KSPAssets.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\Mono.Cecil.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\Ionic.Zip.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\TDx.TDxInput.dll
-D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\RedShellSDK.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csproj.CoreCompileInputs.cache
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csproj.CopyComplete
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.dll
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.pdb
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csprojResolveAssemblyReference.cache
+D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\ClickThroughBlocker.dll
