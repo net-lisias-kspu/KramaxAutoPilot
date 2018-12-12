@@ -14,6 +14,7 @@ This is Lisias' fork for Kramax Autopilot.
 * Documentation	
 	+ [Homepage](http://ksp.lisias.net/add-ons/KramaxAutoPilot) on L Aerospace KSP Division
 	+ [Project's README](https://github.com/net-lisias-ksp/KramaxAutoPilot/blob/master/README.md)
+	+ [Install Instructions](https://github.com/net-lisias-ksp/KramaxAutoPilot/blob/master/INSTALL.md)
 	+ [Change Log](./CHANGE_LOG.md)
 	+ [TODO](./TODO.md) list
 * Official Distribution Sites:
@@ -52,17 +53,10 @@ You can use the autopilot to depart from KSC runway 09 as well as land on it. He
 + After passing MAXKY you can enable auto-throttle "Landing" mode to hold current speed and then decrease it to match the approach speeds as it heads for the next fixes.
 + At 500m (above ground) it should auto-lower your landing gear. But a good pilot makes sure he has 3-green before touching down! If all goes well it will cut your throttle right over the threshold, touchdown, and turn on max braking.
 
+
 ## Installation
 
-To install, place the GameData folder inside your Kerbal Space Program folder.
-
-**REMOVE ANY OLD VERSIONS OF THE PRODUCT BEFORE INSTALLING**.
-
-### Dependencies
-* Hard Dependencies
-	* [KSP API Extensions/L](https://github.com/net-lisias-ksp/KSPAPIExtensions) 2.0 or newer
-	* [Toolbar Control](https://github.com/net-lisias-kspu/ToolbarControl) 0.1.6.15 or newer
-
+Detailed installation instructions are now on its own file (see the [In a Hurry](#in-a-hurry) section) and on the distribution file.
 
 ### Attributions
 This plugin is a heavily modified version of "Pilot Assistant" by Crzyrndm (<https://github.com/Crzyrndm/Pilot-Assistant>). At least half (if not more) of the code is his. Many thanks as to him, as this would never have been possible without it.
