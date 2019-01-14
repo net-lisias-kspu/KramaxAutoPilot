@@ -37,5 +37,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion(Kramax.Version.Number)]
 [assembly: KSPAssembly("KramaxAutoPilot", Kramax.Version.major, Kramax.Version.minor)]
 
-[assembly: KSPAssemblyDependency("KSPe", 2, 0)]
+[assembly: KSPAssemblyDependency("KSPe", 2, 1)]
 [assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]

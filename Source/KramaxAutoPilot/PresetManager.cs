@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using KSPe;
+using Data = KSPe.IO.Data;
 
 #if DEBUG
 //TODO: Redirect this to the debugging version of the reloader.
@@ -36,8 +36,6 @@ namespace Kramax
 
         public Dictionary<string, CraftPreset> craftPresetDict = new Dictionary<string, CraftPreset>();
 
-        private static readonly PluginConfig Defaults = PluginConfig.ForType<KramaxAutoPilot>(null, "Defaults.userprefs");
-        private static readonly PluginConfig Presets = PluginConfig.ForType<KramaxAutoPilot>(null, "Presets.userprefs");
 
         const string craftDefaultName = "default";
         const string apDefaultName = "default";
@@ -72,6 +70,8 @@ namespace Kramax
         double[] defaultPresetPitchGains = { 0.15, 0.0, 0.06, 3, 20 }; // Kp/i/d, scalar, delay
         double[] defaultPresetRollGains = { 0.1, 0.0, 0.06, 3, 20 };
         double[] defaultPresetHdgGains = { 2.0, 0.0, 0.0, 0.1, 20 };
+        private static readonly Data.ConfigNode Defaults = Data.ConfigNode.ForType<KramaxAutoPilot>(null, "Defaults.userprefs");
+        private static readonly Data.ConfigNode Presets = Data.ConfigNode.ForType<KramaxAutoPilot>(null, "Presets.userprefs");
 
         public void Awake()
         {
