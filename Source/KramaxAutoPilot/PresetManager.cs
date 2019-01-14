@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -36,42 +35,36 @@ namespace Kramax
 
         public Dictionary<string, CraftPreset> craftPresetDict = new Dictionary<string, CraftPreset>();
 
-
-        const string craftDefaultName = "default";
-        const string apDefaultName = "default";
-
-        const string craftPresetNodeName = "CraftPreset";
-        const string apPresetNodeName = "PIDPreset";
-
-        const string craftAPKey = "pilot";
-
-        const string hdgCtrlr = "HdgBankController";
-        const string yawCtrlr = "HdgYawController";
-        const string aileronCtrlr = "AileronController";
-        const string rudderCtrlr = "RudderController";
-        const string altCtrlr = "AltitudeController";
-        const string vertCtrlr = "AoAController";
-        const string elevCtrlr = "ElevatorController";
-        const string speedCtrlr = "SpeedController";
-        const string accelCtrlr = "AccelController";
-        const string cdiCtrlr = "CDIController";
-
-        const string pGain = "PGain";
-        const string iGain = "IGain";
-        const string dGain = "DGain";
-        const string min = "MinOut";
-        const string max = "MaxOut";
-        const string iLower = "ClampLower";
-        const string iUpper = "ClampUpper";
-        const string scalar = "Scalar";
-        const string ease = "Ease";
-        const string delay = "Delay";
-
-        double[] defaultPresetPitchGains = { 0.15, 0.0, 0.06, 3, 20 }; // Kp/i/d, scalar, delay
-        double[] defaultPresetRollGains = { 0.1, 0.0, 0.06, 3, 20 };
-        double[] defaultPresetHdgGains = { 2.0, 0.0, 0.0, 0.1, 20 };
         private static readonly Data.ConfigNode Defaults = Data.ConfigNode.ForType<KramaxAutoPilot>(null, "Defaults.userprefs");
         private static readonly Data.ConfigNode Presets = Data.ConfigNode.ForType<KramaxAutoPilot>(null, "Presets.userprefs");
+		private const string craftDefaultName = "default";
+		private const string apDefaultName = "default";
+		private const string craftPresetNodeName = "CraftPreset";
+		private const string apPresetNodeName = "PIDPreset";
+		private const string craftAPKey = "pilot";
+		private const string hdgCtrlr = "HdgBankController";
+		private const string yawCtrlr = "HdgYawController";
+		private const string aileronCtrlr = "AileronController";
+		private const string rudderCtrlr = "RudderController";
+		private const string altCtrlr = "AltitudeController";
+		private const string vertCtrlr = "AoAController";
+		private const string elevCtrlr = "ElevatorController";
+		private const string speedCtrlr = "SpeedController";
+		private const string accelCtrlr = "AccelController";
+		private const string cdiCtrlr = "CDIController";
+		private const string pGain = "PGain";
+		private const string iGain = "IGain";
+		private const string dGain = "DGain";
+		private const string min = "MinOut";
+		private const string max = "MaxOut";
+		private const string iLower = "ClampLower";
+		private const string iUpper = "ClampUpper";
+		private const string scalar = "Scalar";
+		private const string ease = "Ease";
+		private const string delay = "Delay";
+		private double[] defaultPresetPitchGains = { 0.15, 0.0, 0.06, 3, 20 }; // Kp/i/d, scalar, delay
+		private double[] defaultPresetRollGains = { 0.1, 0.0, 0.06, 3, 20 };
+		private double[] defaultPresetHdgGains = { 2.0, 0.0, 0.0, 0.1, 20 };
 
         public void Awake()
         {

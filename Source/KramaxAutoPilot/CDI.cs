@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using KSP.UI;
-using KSP.UI.Screens;
 using KSP.UI.Screens.Flight;
 
 using Kramax.Utility;

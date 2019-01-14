@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 namespace Kramax
@@ -17,7 +15,7 @@ namespace Kramax
         public double progradeHeading = 0;
         public double vertSpeed = 0;
         public double acceleration = 0;
-        double oldSpd = 0;
+		public double oldSpd = 0;
 
         public Vector3d lastPlanetUp = Vector3d.zero;
         public Vector3d planetUp = Vector3d.zero;
@@ -100,7 +98,7 @@ namespace Kramax
             oldSpd = vessel.srfSpeed;
         }
 
-        Vector3 vesselFacingAxis = new Vector3();
+		private Vector3 vesselFacingAxis = new Vector3();
         /// <summary>
         /// Find the vessel orientation at the CoM by interpolating from surrounding part transforms
         /// This orientation should be significantly more resistant to vessel flex/wobble than the vessel transform (root part) as a free body rotates about it's CoM
@@ -137,7 +135,7 @@ namespace Kramax
             }
         }
 
-        ArrowPointer pointer;
+		private ArrowPointer pointer;
         public void drawArrow(Vector3 dir, Transform t)
         {
             if (pointer == null)

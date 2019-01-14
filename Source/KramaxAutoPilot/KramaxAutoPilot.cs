@@ -15,11 +15,6 @@
  * purposes. It is in no way meant to represent a real entity. Any similarity to a real entity
  * is purely coincidental.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 
 #if DEBUG
 //TODO: Redirect this to the debugging version of the reloader.
@@ -71,12 +66,11 @@ namespace Kramax
     [KSPAddon(KSPAddon.Startup.Flight, false)]
 	public class KramaxAutoPilot : MonoBehaviour
     {
-        bool bUseStockToolbar = true;
+		private readonly bool bUseStockToolbar = true;
         public static bool bDisplayAutoPilot = false; // set by launcher
         public static bool bDisplayTooltips = true; // set by launcher
         public static bool bHideUI = false;
-
-        George mainPilot = null;
+		private George mainPilot = null;
 
          /*
          * Caution: as it says here: http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.Awake.html,
@@ -156,7 +150,7 @@ namespace Kramax
             // Deb.Verb("KramaxAutoPilot: LateUpdate");
         }
 
-        /*
+		/*
         public void OnGUI()
         {
             if (GeneralUI.UISkin == null)
@@ -208,12 +202,12 @@ namespace Kramax
         }
         */
 
-        void hideUI()
+		private void hideUI()
         {
             bHideUI = true;
         }
 
-        void showUI()
+		private void showUI()
         {
             bHideUI = false;
         }

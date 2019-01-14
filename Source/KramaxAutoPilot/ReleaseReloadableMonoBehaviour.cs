@@ -4,9 +4,6 @@
 // has no requirement for the plugin reload extension.
 //#if !DEBUG
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace KramaxReloadExtensions

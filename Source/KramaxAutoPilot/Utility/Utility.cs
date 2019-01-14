@@ -16,9 +16,7 @@
  * is purely coincidental.
  */
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Kramax.Utility
@@ -243,12 +241,10 @@ namespace Kramax.Utility
 
         public static string TryGetValue(this ConfigNode node, string key, string defaultValue)
         {
-            if (node.HasValue(key))
-                return node.GetValue(key);
-            return defaultValue;
-        }
+			return node.HasValue(key) ? node.GetValue(key) : defaultValue;
+		}
 
-        public static bool TryGetValue(this ConfigNode node, string key, bool defaultValue)
+		public static bool TryGetValue(this ConfigNode node, string key, bool defaultValue)
         {
             bool val;
             if (node.HasValue(key) && bool.TryParse(node.GetValue(key), out val))
