@@ -94,6 +94,7 @@ namespace Kramax
         public void Awake()
         {
             Deb.Log("KramaxAutoPilot: Awake {0}", this.GetInstanceID());
+            RegisterToolbar.register_toolbar(gameObject);
         }
 
         private bool UseAppLauncher()
@@ -117,10 +118,6 @@ namespace Kramax
             // initialize any variables
             // install any callbacks
             // install in toolbar
-            if (UseAppLauncher())
-                Kramax.Toolbar.AppLauncherAutoPilot.Start(this.gameObject);
-            else
-                Kramax.Toolbar.ToolbarMod.Start();
 
             if (mainPilot != null)
             {
@@ -141,7 +138,7 @@ namespace Kramax
             // Deb.Verb("KramaxAutoPilot: Update");
             if (UseAppLauncher())
             {
-                Kramax.Toolbar.AppLauncherAutoPilot.setBtnState(bDisplayAutoPilot);
+                Kramax.RegisterToolbar.setBtnState(bDisplayAutoPilot);
              
             }
         }
@@ -224,11 +221,6 @@ namespace Kramax
         public void OnDestroy()
         {
             Deb.Log("KramaxAutoPilot: OnDestroy {0}", this.GetInstanceID());
-
-            if (UseAppLauncher())
-                Kramax.Toolbar.AppLauncherAutoPilot.OnDestroy();
-            else
-                Kramax.Toolbar.ToolbarMod.OnDestroy();
 
             if (mainPilot)
             {

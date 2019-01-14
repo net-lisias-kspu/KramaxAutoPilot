@@ -52,8 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReleaseReloadableMonoBehaviour.cs" />
     <Compile Include="ToolbarRegistration.cs" />
-    <Compile Include="Toolbar\AppLauncher.cs" />
-    <Compile Include="Toolbar\ToolbarMod.cs" />
     <Compile Include="Utility\GeneralUI.cs" />
     <Compile Include="Utility\Utility.cs" />
     <Compile Include="VesselData.cs">
