@@ -1,3 +1,7 @@
+0.3.7
+	Added InstallChecker
+	Updated AssemblyVersion.tt
+
 0.3.6.1
 	Version bump for 1.5 rebuild
 
