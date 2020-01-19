@@ -33,6 +33,6 @@ cp CHANGE_LOG.md "./GameData/$TARGETDIR"
 cp README.md  "./GameData/$TARGETDIR"
 cp LICENSE "./GameData/$TARGETDIR"
 cp NOTICE "./GameData/$TARGETDIR"
-for dll in $PACKAGE ; do
+for dll in $DLLS ; do
     deploy $dll
 done
