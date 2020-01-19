@@ -2,6 +2,7 @@
 using UnityEngine;
 using KSP.UI;
 using KSP.UI.Screens.Flight;
+using GUI = KSPe.UI.GUI;
 
 using Kramax.Utility;
 

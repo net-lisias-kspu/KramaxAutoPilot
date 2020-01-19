@@ -21,6 +21,8 @@ using System.Linq;
 using UnityEngine;
 
 using KSPe;
+using GUILayout = KSPe.UI.GUILayout;
+
 
 #if DEBUG
 //TODO: Redirect this to the debugging version of the reloader.
