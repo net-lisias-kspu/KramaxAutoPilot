@@ -83,10 +83,10 @@ Please note the copyrights and trademarks in [NOTICE](./NOTICE)
 * [LGG](https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/): PARENT
 	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/150846-141-kramax-autopilot-continued-course-guidance-and-auto-land-for-spaceplanes/)
 	+ [SpaceDock](https://spacedock.info/mod/1019/Kramax%20Autopilot%20Continued)
-	+ [GitHub](https://github.com/Swamp-Ig/KSPAPIExtensions)
+	+ [GitHub](https://github.com/linuxgurugamer/KramaxAutoPilot)
 * [Kramer](https://forum.kerbalspaceprogram.com/index.php?/profile/151907-kramer/): ROOT
 	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/122258-104-kramax-autopilot-course-guidance-and-auto-land-for-spaceplanes-v02/)	 
-	+ [GitHub](https://github.com/toadicus/KSPAPIExtensions)
+	+ [GitHub](https://github.com/Kramax/KramaxAutoPilot))
 * [Crzyrndm](https://forum.kerbalspaceprogram.com/index.php?/profile/92871-crzyrndm/): (Origin, not a fork)
 	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/90252-13-pilot-assistant-atmospheric-piloting-aids-1132-may-28/&) 
 	+ [GitHub](https://github.com/Crzyrndm/Pilot-Assistant)
