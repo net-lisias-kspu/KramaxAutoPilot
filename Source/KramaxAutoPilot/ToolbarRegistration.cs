@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using KSP.UI.Screens;
-using GDB = KSPe.GameDB;
 
 using ToolbarControl_NS;
 
 namespace Kramax
 {
+	using Asset = KSPe.IO.File<KramaxAutoPilot>.Asset;
+
     [KSPAddon(KSPAddon.Startup.MainMenu, true)]
     public class RegisterToolbar : MonoBehaviour
     {
@@ -29,8 +30,8 @@ namespace Kramax
                 ApplicationLauncher.AppScenes.MAPVIEW,
                 MODID,
                 MODID + "Button",
-                GDB.Asset<KramaxAutoPilot>.Solve("Icon/icon-38"),
-                GDB.Asset<KramaxAutoPilot>.Solve("Icon/icon-24"),
+                Asset.Solve("Icon", "icon-38"),
+                Asset.Solve("Icon", "icon-24"),
                 MODNAME
             );
 
