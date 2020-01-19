@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KramaxAutoPilot")]
+[assembly: AssemblyTitle("KramaxAutoPilot /L")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kramax")]
 [assembly: AssemblyProduct("KramaxAutoPilot")]
-[assembly: AssemblyCopyright("© 2015-2016 Crzyrndm, © 2017-2018 LinuxGuruGamer, © 2018 LisiasT")]
+[assembly: AssemblyCopyright("© 2015-2016 Crzyrndm, © 2017-2018 LinuxGuruGamer, © 2018-2020 LisiasT")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
