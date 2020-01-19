@@ -1,11 +1,8 @@
 # KramaxAutoPilot /L :: Changes
 
-* 2018-1111: 0.3.6.2 (Lisias) for KSP 1.4.1+; 1.5
-	+ Some code optizations and compliance
-	+ Miscellaneous code fixes.
-	+ Adding KSPe facilities
-		- Data files
-		- Logging 
-	+ Flight Plans reorganized and documented
-	+ Flight Plan Window now have a scrollbar
-	+ Make the CDI moveable
+* 2020-0119: 0.4.0.1 (Lisias) for KSP >= 1.4.1
+	+ Updating KSPe services to 2.1
+		+ Better logging
+		+ Installment checks
+		+ UI services
+	+ Bumping version to catchup with upstream's.  
