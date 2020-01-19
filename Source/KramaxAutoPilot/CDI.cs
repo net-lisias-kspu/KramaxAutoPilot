@@ -117,13 +117,12 @@ namespace Kramax
 
         public void Awake()
         {
-            Debug.Log("CDI: awaken");
-            Deb.Log("CDI: Awake {0}", this.GetInstanceID());
+            Log.detail("CDI: Awake {0}", this.GetInstanceID());
         }
 
         public void Start()
         {
-            Deb.Log("CDI: Start {0}", this.GetInstanceID());
+            Log.detail("CDI: Start {0}", this.GetInstanceID());
             
             GetNavBallRect();
             AdjustRectForNavBallRect();
@@ -146,7 +145,7 @@ namespace Kramax
             window.x = (int) (0.5+navBallRect.x - ((688.0f - 655.0f) * (window.width / 300.0f)));
             window.y = (int)(0.5 + navBallRect.y - ((1000 - 960) * (window.height / 255.0f)));
 
-            Deb.Log("CDI overlay rect: {0}", window);
+            Log.detail("CDI overlay rect: {0}", window);
         }
 
         public void GetNavBallRect()
@@ -159,12 +158,12 @@ namespace Kramax
 
             if (navball == null)
             {
-                Deb.Err("GetNavBallArea: no navball object found");
+                Log.error("GetNavBallArea: no navball object found");
             }
 
-            Deb.Log("Navball game object: {0}", navball);
-            Deb.Log("Navball transform: {0}", navball.transform.localToWorldMatrix);
-            Deb.Log("Navball transform.position: {0}", navball.transform.position);
+            Log.detail("Navball game object: {0}", navball);
+            Log.detail("Navball transform: {0}", navball.transform.localToWorldMatrix);
+            Log.detail("Navball transform.position: {0}", navball.transform.position);
 
 			// position is (1.0,0.1,0.0) when visible
 			// position is (1.0,-0.1,0.0) when not visible
@@ -175,7 +174,7 @@ namespace Kramax
             // this looks to be the center of the ball with Y counting up from bottom of screen
             // so 800,85 for 1600x1200 screen.
             Vector3 center = camera.WorldToScreenPoint(navball.transform.position);
-            Deb.Log("Navball center in screen point: {0}", center);
+            Log.detail("Navball center in screen point: {0}", center);
 
             // cannot figure out how to get actual size. Just assume that since we have the center
             // and the Y is offset from 0 the size is about twice that.
@@ -190,7 +189,7 @@ namespace Kramax
             navBallRect =
                 new Rect(center.x - width / 2, Screen.height - height, width, height);
 
-            Deb.Log("Navball Rect calculated to be: {0}", navBallRect);
+            Log.detail("Navball Rect calculated to be: {0}", navBallRect);
         }        
 
 

@@ -1,40 +1,82 @@
 ﻿using System;
-using KSPe;
 using KSPe.Util.Log;
+using System.Diagnostics;
 
-namespace Kramax.Utility
+#if DEBUG
+using System.Collections.Generic;
+#endif
+
+namespace Kramax
 {
-	public static class Deb
-	{
-		private static Logger logger = new UnityLogger("KRAMAX");
-		public static bool debug { 
-			get => logger.level > Level.INFO; 
-			set => logger.level = value ? Level.TRACE : Level.INFO;
-		}
+    internal static class Log
+    {
+        private static readonly Logger log = Logger.CreateForType<KramaxAutoPilot>();
 
-		public static void Log(String format, params System.Object[] args)
+        internal static void init()
         {
-            logger.trace(format, args);
+            log.level =
+#if DEBUG
+                Level.TRACE
+#else
+                Level.INFO
+#endif
+                ;
         }
 
-        public static void Log(String message)
+        internal static void force (string msg, params object [] @params)
         {
-            logger.trace(message);
+            log.force (msg, @params);
         }
 
-        public static void Verb(String format, params System.Object[] args)
+        internal static void info(string msg, params object[] @params)
         {
-            logger.detail(format, args);
+            log.info(msg, @params);
         }
 
-        public static void Verb(String message)
+        internal static void warn(string msg, params object[] @params)
         {
-            logger.detail(message);
+            log.warn(msg, @params);
         }
 
-        public static void Err(String format, params System.Object[] args)
+        internal static void detail(string msg, params object[] @params)
         {
-            logger.error(format, args);
+            log.detail(msg, @params);
         }
-	}
+
+        internal static void error(Exception e, object offended)
+        {
+            log.error(offended, e);
+        }
+
+        internal static void error(Exception e, string msg, params object[] @params)
+        {
+            log.error(e, msg, @params);
+        }
+
+        internal static void error(string msg, params object[] @params)
+        {
+            log.error(msg, @params);
+        }
+
+        [ConditionalAttribute("DEBUG")]
+        internal static void dbg(string msg, params object[] @params)
+        {
+            log.trace(msg, @params);
+        }
+
+        #if DEBUG
+        private static readonly HashSet<string> DBG_SET = new HashSet<string>();
+        #endif
+
+        [ConditionalAttribute("DEBUG")]
+        internal static void dbgOnce(string msg, params object[] @params)
+        {
+            string new_msg = string.Format(msg, @params);
+            #if DEBUG
+            if (DBG_SET.Contains(new_msg)) return;
+            DBG_SET.Add(new_msg);
+            #endif
+            log.trace(new_msg);
+        }
+    }
 }

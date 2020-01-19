@@ -79,7 +79,7 @@ namespace Kramax
          */
         public KramaxAutoPilot()
         {
-            Deb.Log("KramaxAutoPilot: ctor {0}", this.GetInstanceID());
+            Log.detail("KramaxAutoPilot: ctor {0}", this.GetInstanceID());
         }
 
         /*
@@ -87,7 +87,7 @@ namespace Kramax
          */
         public void Awake()
         {
-            Deb.Log("KramaxAutoPilot: Awake {0}", this.GetInstanceID());
+            Log.detail("KramaxAutoPilot: Awake {0}", this.GetInstanceID());
             RegisterToolbar.register_toolbar(gameObject);
         }
 
@@ -101,12 +101,7 @@ namespace Kramax
          */
         public void Start()
         {
-#if DEBUG
-			Deb.debug = true;
-#else
-			Deb.debug = false;
-#endif
-			Deb.Log("KramaxAutoPilot: Start {0}", this.GetInstanceID()); 
+			Log.detail("KramaxAutoPilot: Start {0}", this.GetInstanceID()); 
           
             // read in config
             // initialize any variables
@@ -115,11 +110,11 @@ namespace Kramax
 
             if (mainPilot != null)
             {
-                Deb.Err("KramaxAutoPilot.Start: mainPilot stil exists");
+                Log.error("KramaxAutoPilot.Start: mainPilot stil exists");
             }
             else
             {
-                Deb.Log("KramaxAutoPilot.Start: creating mainPilot");
+                Log.detail("KramaxAutoPilot.Start: creating mainPilot");
                 mainPilot = AddComponent(typeof(George)) as George;
             }
         }
@@ -214,7 +209,7 @@ namespace Kramax
        
         public void OnDestroy()
         {
-            Deb.Log("KramaxAutoPilot: OnDestroy {0}", this.GetInstanceID());
+            Log.detail("KramaxAutoPilot: OnDestroy {0}", this.GetInstanceID());
 
             if (mainPilot)
             {

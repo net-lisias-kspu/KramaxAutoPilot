@@ -68,13 +68,13 @@ namespace Kramax
 
         public void Awake()
         {
-            Deb.Log("PresetManager.Awake: creating singleton instance");
+            Log.detail("PresetManager.Awake: creating singleton instance");
             instance = this;
         }
 
         public void Start()
         {
-            Deb.Log("PresetManager.Start: initialize");
+            Log.detail("PresetManager.Start: initialize");
             loadPresetsFromFile();
             DontDestroyOnLoad(this);
         }

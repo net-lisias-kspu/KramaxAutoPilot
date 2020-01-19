@@ -172,14 +172,14 @@ namespace Kramax
 
             if (raiseTrigger && ralt > raiseHeight)
             {
-                Deb.Log("GearHandler: raising gear at height {0}", ralt);
+                Log.detail("GearHandler: raising gear at height {0}", ralt);
 
                 vessel.ActionGroups.SetGroup(KSPActionGroup.Gear, false);
                 raiseTrigger = false;
             }
             if (downTrigger && ralt < lowerHeight)
             {
-                Deb.Log("GearHandler: lowering gear at height {0}", ralt);
+                Log.detail("GearHandler: lowering gear at height {0}", ralt);
 
                 vessel.ActionGroups.SetGroup(KSPActionGroup.Gear, true);
                 downTrigger = false;
@@ -470,7 +470,7 @@ namespace Kramax
             double ri2, di2; // di2 should match curentDistance
             BearingAndDistanceRad(planet, rlat_i, rlon_i, rlat2, rlon2, out ri2, out di2);
 
-            //  Deb.Log("d12:{0:F2} d13:{1:F2} d32:{2:F2}, cd:{3:F2} di2:{4:F2} fr:{5:F3}", 
+            //  Log.detail("d12:{0:F2} d13:{1:F2} d32:{2:F2}, cd:{3:F2} di2:{4:F2} fr:{5:F3}", 
             //        d12, d13, d32, cs.currentDistance, di2, cs.fraction);
             
             cs.currentBearing = ToDegrees(ri2);
@@ -535,7 +535,7 @@ namespace Kramax
                 prev_wp = new_wp;
             }
 
-            Deb.Log("FlightPlan.Clone: update waypoint values for resulting course.");
+            Log.detail("FlightPlan.Clone: update waypoint values for resulting course.");
             result.UpdateWayPointValues(planet);
 
             return result;
@@ -627,7 +627,7 @@ namespace Kramax
             // without user being aware. Not fraction is clamped 0 to 1 so do not use that.
             if (!courseStatus.beenValid && (0 < courseStatus.fraction && courseStatus.fraction < 1))
             {
-                Deb.Log("UpdateData: marking course to {0} with dist {1} as valid", next, courseStatus.distanceTraveled);
+                Log.detail("UpdateData: marking course to {0} with dist {1} as valid", next, courseStatus.distanceTraveled);
                 courseStatus.beenValid = true;
             }
 
@@ -652,8 +652,8 @@ namespace Kramax
                 courseStatus.vC = Double.NaN;
             }
 
-            // Deb.Log("FP: delta_t={2}, dXt={0}, vXt={1}", courseStatus.dXt, courseStatus.vXt, delta_time);
-            // Deb.Log("Along track velocity: {0}", courseStatus.vC);
+            // Log.detail("FP: delta_t={2}, dXt={0}, vXt={1}", courseStatus.dXt, courseStatus.vXt, delta_time);
+            // Log.detail("Along track velocity: {0}", courseStatus.vC);
 
             if (next.HasFlag(WPFlag.Vertical))
             {
@@ -700,7 +700,7 @@ namespace Kramax
             {
                 if (nextNext != null)
                 {
-                    Deb.Log("FlightPlan.Update: traveled past current leg, sequence");
+                    Log.detail("FlightPlan.Update: traveled past current leg, sequence");
                     SequenceWaypoint(george, vessel, vdata);
                     return;
                 }
@@ -742,7 +742,7 @@ namespace Kramax
 
                     if (timeToNext < timeToTurn)
                     {
-                        Deb.Log("FlightPlan.Update: time to turn (speed {5}, remain {0}, timeToNext {1}, amount {2}, rate {3}, timeToTurn {4}",
+                        Log.detail("FlightPlan.Update: time to turn (speed {5}, remain {0}, timeToNext {1}, amount {2}, rate {3}, timeToTurn {4}",
                             remaining, timeToNext, turnAmount, turnRate, timeToTurn, speed);
                         SequenceWaypoint(george, vessel, vdata);
                         return;
@@ -841,7 +841,7 @@ namespace Kramax
 
 				double result = nominalRate + adjust;
 
-                // Deb.Log("RequiredDescentRate: slp {5}, nom {0}, T {1}, error {2}, adj {3}, result {4}",
+                // Log.detail("RequiredDescentRate: slp {5}, nom {0}, T {1}, error {2}, adj {3}, result {4}",
                 //    nominalRate, timeToIntercept, error, adjust, result, courseStatus.courseSlope, speed);
 
                 return result;
@@ -865,7 +865,7 @@ namespace Kramax
 
 			WayPoint after = wp.next;
 
-            Deb.Log("UpdateWayPoint: {0}, next={1}", wp, after);
+            Log.detail("UpdateWayPoint: {0}, next={1}", wp, after);
 
             if (after == null)
                 return;
@@ -934,7 +934,7 @@ namespace Kramax
         // EXCEPTION; if it would by-pass final approach or IAF to FAF we want to go to the leg
         public void DirectToWaypoint(George george, WayPoint awp, Vessel vessel, VesselData vdata)
         {            
-            Deb.Log("DirectToWaypoint: direct to {0}", next);
+            Log.detail("DirectToWaypoint: direct to {0}", next);
 
             if (next != null)
                 next.ClearFlag(WPFlag.Active);
@@ -949,7 +949,7 @@ namespace Kramax
             // should not happen, but just in case
             if (course.Count == 0)
             {
-                Deb.Err("DirectToWaypoint: flight plan has no waypoint");
+                Log.error("DirectToWaypoint: flight plan has no waypoint");
                 return;
             }
 
@@ -990,7 +990,7 @@ namespace Kramax
 
             if (ndx < 0)
             {             
-                Deb.Err("DirectToWaypoint: wp {0} not found.", awp);
+                Log.error("DirectToWaypoint: wp {0} not found.", awp);
                 return;
             }
 
@@ -1018,7 +1018,7 @@ namespace Kramax
                 if (prevToDirect == null)
                 {
                     // should not happen, but just in case
-                    Deb.Err("DirectToWaypoint: no previous waypoint for leg!");
+                    Log.error("DirectToWaypoint: no previous waypoint for leg!");
                     return;
                 }
     
@@ -1057,11 +1057,11 @@ namespace Kramax
 
         public void SequenceWaypoint(George george, Vessel vessel, VesselData vdata)
         {
-            Deb.Log("SequenceWaypoint: go");
+            Log.detail("SequenceWaypoint: go");
 
             if (next == null)
             {
-                Deb.Log("SequenceWaypoint: no next waypoint.");
+                Log.detail("SequenceWaypoint: no next waypoint.");
                 return;
             }
 
@@ -1089,25 +1089,25 @@ namespace Kramax
             {
                 if (next.HasFlag(WPFlag.RW)) // are we on final approach?
                 {
-                    Deb.Log("SequenceWaypoint: final approach, do not touch altitude");
+                    Log.detail("SequenceWaypoint: final approach, do not touch altitude");
                 }
                 else
                 {
                     if (prev.alt < vessel.altitude)
                     {
-                        Deb.Log("SequenceWaypoint: adjust alt of prev from {0} to {1}",
+                        Log.detail("SequenceWaypoint: adjust alt of prev from {0} to {1}",
                                 prev.alt, vessel.altitude);
                         prev.alt = vessel.altitude;
                     }
                     else
                     {
-                        Deb.Log("SequenceWaypoint: current alt below prev alt, keep it");
+                        Log.detail("SequenceWaypoint: current alt below prev alt, keep it");
                     }
                 }
             }
             else
             {
-                Deb.Log("SequenceWaypoint: prev has no vertical info, so fill in our alt");
+                Log.detail("SequenceWaypoint: prev has no vertical info, so fill in our alt");
                 prev.SetFlag(WPFlag.Vertical);
                 prev.alt = vessel.altitude;
             }
@@ -1284,13 +1284,13 @@ namespace Kramax
 
         public George()
         {
-            Deb.Log("George: Mark IV ctor {0}", this.GetInstanceID());
+            Log.detail("George: Mark IV ctor {0}", this.GetInstanceID());
         }
 
         public void Awake()
         {
             Debug.Log("George: awaken");
-            Deb.Log("George: Awake {0}", this.GetInstanceID());
+            Log.detail("George: Awake {0}", this.GetInstanceID());
         }
 
         private WayPoint AddNamedPoint(double lat, double lon, double alt, String name,
@@ -1329,7 +1329,7 @@ namespace Kramax
 
         public void Start()
         {
-            Deb.Log("George: Start {0}", this.GetInstanceID());
+            Log.detail("George: Start {0}", this.GetInstanceID());
 
             Initialise();
 
@@ -1337,13 +1337,13 @@ namespace Kramax
 
 			UnityEngine.MonoBehaviour comp = AddComponent(typeof(CDI));
 
-            Deb.Log("George: Start: CDI add component result is {0}", comp);
+            Log.detail("George: Start: CDI add component result is {0}", comp);
 
             indicator = comp as CDI;
 
             if (indicator == null)
             {
-                Deb.Err("George: Start-indicator component create failed.");
+                Log.error("George: Start-indicator component create failed.");
             }
 
             InputLockManager.RemoveControlLock(pitchLockID);
@@ -1402,11 +1402,11 @@ namespace Kramax
         {
             if (v == null)
             {
-                Deb.Log("UnhookVessel: vessel is null");
+                Log.detail("UnhookVessel: vessel is null");
                 return;
             }
 
-            Deb.Log("UnhookVessel: unhooking {0}", v);
+            Log.detail("UnhookVessel: unhooking {0}", v);
 
             v.OnPreAutopilotUpdate -= new FlightInputCallback(PreAutoPilotUpdate);
             v.OnPostAutopilotUpdate -= new FlightInputCallback(PostAutoPilotUpdate);
@@ -1416,7 +1416,7 @@ namespace Kramax
         {
             if (v == null)
             {
-                Deb.Log("George.SwitchVessels: null vessel");
+                Log.detail("George.SwitchVessels: null vessel");
 
                 if (vessel != null)
                     UnhookVessel(vessel);
@@ -1425,11 +1425,11 @@ namespace Kramax
                 vessel = null;
             }
 
-            Deb.Log("George.SwitchVessels: new vessel {0}", v);
+            Log.detail("George.SwitchVessels: new vessel {0}", v);
 
             if (vessel == v)
             {
-                Deb.Log("George.switchVessels: same vessel");
+                Log.detail("George.switchVessels: same vessel");
                 return;
             }
 
@@ -1438,7 +1438,7 @@ namespace Kramax
             // hopefully by watching on active vessel we will be OK.
             if (!v.isActiveVessel || v.isEVA)
             {
-                Deb.Log("George.switchVessels: new vessel is not active one or EVA, ignore.");
+                Log.detail("George.switchVessels: new vessel is not active one or EVA, ignore.");
                 return;
             }
 
@@ -1451,7 +1451,7 @@ namespace Kramax
 
             if (vessel.mainBody == null)
             {
-                Deb.Err("George.SwitchVessels: vessel has no main body");
+                Log.error("George.SwitchVessels: vessel has no main body");
             }
             // update to use this new vessel
             vesselData = new VesselData();
@@ -1474,24 +1474,24 @@ namespace Kramax
 
         private void VesselSwitched(Vessel v)
         {
-            Deb.Log("VesselSwitched: {0}", v);
+            Log.detail("VesselSwitched: {0}", v);
             SwitchVessels(v);
         }
 
 
         private void VesselChanged(Vessel v)
         {
-            Deb.Log("VesselChanged: {0}", v);
+            Log.detail("VesselChanged: {0}", v);
             SwitchVessels(v);
         }
 
         private void VesselDestroyed(Vessel v)
         {
-            Deb.Log("George.vesselDestroyed: vessel going away {0}", v);
+            Log.detail("George.vesselDestroyed: vessel going away {0}", v);
 
             if (vessel != v)
             {
-                Deb.Log("George.vesselDestroyed: not our vessel");
+                Log.detail("George.vesselDestroyed: not our vessel");
                 return;
             }
 
@@ -1647,48 +1647,48 @@ namespace Kramax
         {
             if (wp == null)
             {
-                Deb.Log("UpdateLandingMode: no waypoint");
+                Log.detail("UpdateLandingMode: no waypoint");
                 return;
             }
 
-            Deb.Log("UpdateLandingMode: {0}", wp);
+            Log.detail("UpdateLandingMode: {0}", wp);
 
             if (wp.HasFlag(WPFlag.Stop))
             {
-                Deb.Log("UpdateLandingMode: autoland--touchdown sequence started.");
+                Log.detail("UpdateLandingMode: autoland--touchdown sequence started.");
                 landingModeChanged(LandingMode.Touchdown);
             }
             else if (wp.HasFlag(WPFlag.IAF))
             {
-                Deb.Log("UpdateLandingMode: autoland--flying to IAF.");
+                Log.detail("UpdateLandingMode: autoland--flying to IAF.");
                 landingModeChanged(LandingMode.ToIAF);
             }
             else if (wp.HasFlag(WPFlag.FAF))
             {
-                Deb.Log("UpdateLandingMode: autoland--flying to FAF.");
+                Log.detail("UpdateLandingMode: autoland--flying to FAF.");
                 landingModeChanged(LandingMode.ToFAF);
             }
             else if (wp.HasFlag(WPFlag.RW))
             {
-                Deb.Log("UpdateLandingMode: autoland--on final.");
+                Log.detail("UpdateLandingMode: autoland--on final.");
                 landingModeChanged(LandingMode.Final);
             }
             else
             {
-                Deb.Log("WayPointSequenced: autoland--not on approach yet");
+                Log.detail("WayPointSequenced: autoland--not on approach yet");
                 landingModeChanged(LandingMode.None);
             }
         }
 
         public void WayPointSequenced(WayPoint wp)
         {
-            Deb.Log("WayPointSequenced: {0} {1} {2} {3}", wp.lat, wp.lon, wp.alt, wp.flags);
+            Log.detail("WayPointSequenced: {0} {1} {2} {3}", wp.lat, wp.lon, wp.alt, wp.flags);
             UpdateLandingMode(wp);
         }
 
         private void landingModeChanged(LandingMode newMode)
         {
-            Deb.Log("landingModeChanged: new mode {0}", newMode);
+            Log.detail("landingModeChanged: new mode {0}", newMode);
             landingMode = newMode;
         }
 
@@ -1967,13 +1967,13 @@ namespace Kramax
         {
             if (state == null)
             {
-                Deb.Err("vesselController: state is null");
+                Log.error("vesselController: state is null");
                 return;
             }
 
             if (vessel == null)
             {
-                Deb.Err("vesselController: no vessel");
+                Log.error("vesselController: no vessel");
                 return;
 
             }
@@ -1982,7 +1982,7 @@ namespace Kramax
 
             if (!vessel.IsControllable)
             {
-                Deb.Log("vesselController: not controllable or paused.");
+                Log.detail("vesselController: not controllable or paused.");
                 return;
             }
 
@@ -2004,7 +2004,7 @@ namespace Kramax
 
                         if (Double.IsNaN(dXt) || Double.IsNaN(vXt) || Double.IsNaN(vC))
                         {
-                            Deb.Log("HrztActive: NAV mode, invalid course guidance (NaN), skip setting.");
+                            Log.detail("HrztActive: NAV mode, invalid course guidance (NaN), skip setting.");
                         }
                         else
                         {
@@ -2039,7 +2039,7 @@ namespace Kramax
                                     // hdgBankResponse = dXt < 0 ? 45 : -45; // could have wrong sign here; fixme
                                     desiredCrossTrackVelocity = -desiredCrossTrackVelocity;
 
-                                    // Deb.Log("xtrk wrong way: Vc={0:F1}, vXt={1:F1}, dXt={2:F1}",
+                                    // Log.detail("xtrk wrong way: Vc={0:F1}, vXt={1:F1}, dXt={2:F1}",
                                     //       vC, vXt, dXt);
                                 }
 
@@ -2055,7 +2055,7 @@ namespace Kramax
                                     hdgBankResponse =
                                        -xtrkSpeedCtrl.ResponseD(vXt, useIntegralYaw);
 
-                                    //Deb.Log("xtrk valid: Vc={0:F1}, vXt={1:F1}, dXt={2:F1}, des={4:F1}, bank={3:F0}",
+                                    //Log.detail("xtrk valid: Vc={0:F1}, vXt={1:F1}, dXt={2:F1}, des={4:F1}, bank={3:F0}",
                                     //        vC, vXt, dXt, hdgBankResponse, desiredCrossTrackVelocity);
                                 }
                                 else
@@ -2069,7 +2069,7 @@ namespace Kramax
                                     hdgBankResponse =
                                         -xtrkSpeedCtrl.ResponseD(vXt, useIntegralYaw);
 
-                                    //Deb.Log("xtrk too fast: Vc={0:F1}, vXt={1:F1}, dXt={2:F1}, des={4:F1}, mod={5:F1}, bank={3:F1}",
+                                    //Log.detail("xtrk too fast: Vc={0:F1}, vXt={1:F1}, dXt={2:F1}, des={4:F1}, mod={5:F1}, bank={3:F1}",
                                     //        vC, vXt, dXt, hdgBankResponse, desiredCrossTrackVelocity, mod_dctv);
                                 }
                             }
@@ -2085,7 +2085,7 @@ namespace Kramax
                                 rudderCtrl.SetPoint = rudderAngle;
 
                                 float yaw_rate = rudderCtrl.ResponseF(vesselData.yaw, useIntegralYaw).Clamp(-1, 1);
-                                Deb.Log("Hrzt: landed, Vc={0:F1} vXt={1:F1} dXt={2:F1} hbr={3:F2} rudder={4:F2} rate={5:F2} yaw={6:F2}", 
+                                Log.detail("Hrzt: landed, Vc={0:F1} vXt={1:F1} dXt={2:F1} hbr={3:F2} rudder={4:F2} rate={5:F2} yaw={6:F2}", 
                                         vC, vXt, dXt, hdgBankResponse, rudderAngle, yaw_rate, vesselData.yaw);
                             }
                             else
@@ -2170,13 +2170,13 @@ namespace Kramax
 
                     if (Math.Abs(vesselData.bank) > 90)
                     {
-                        Deb.Log("VertMode.Pitch: upside down");
+                        Log.detail("VertMode.Pitch: upside down");
                         pitch_rate *= -1; // flying upside down
                     }
 
                     state.pitch = pitch_rate.Clamp(-1,1);
 
-                    //Deb.Log("VertMode.Pitch: vessel pitch {0:F1}, setpoint {1:F1}, rate {2:F3}",
+                    //Log.detail("VertMode.Pitch: vessel pitch {0:F1}, setpoint {1:F1}, rate {2:F3}",
                     //        vesselData.pitch, elevCtrl.SetPoint, pitch_rate);
                 }
                 else if (CurrentVertMode == VertMode.Glideslope)
@@ -2195,7 +2195,7 @@ namespace Kramax
                                 if (Double.IsNaN(drate))
                                 {
                                     // if we just sequenced it will not be valid
-                                    Deb.Log("VertMode GS, NaN drate, skip setting vspeed.");
+                                    Log.detail("VertMode GS, NaN drate, skip setting vspeed.");
                                 }
                                 else
                                 {
@@ -2215,7 +2215,7 @@ namespace Kramax
                                     double vsp = -(vesselData.radarAlt * 0.5);
                                     vertSpeedCtrl.SetPoint = Utils.Clamp(vsp, -6.0, 0.0);
 
-                                    Deb.Log("VertMode: touching down from {2:F1}, pitch {4:F2}, hsp {3:F0} with vsp {0} (clamped {1})",
+                                    Log.detail("VertMode: touching down from {2:F1}, pitch {4:F2}, hsp {3:F0} with vsp {0} (clamped {1})",
                                             vsp, vertSpeedCtrl.SetPoint, vesselData.radarAlt, vessel.srfSpeed,
                                             state.pitch);
                                 }
@@ -3447,7 +3447,7 @@ namespace Kramax
                 if (update_button_pressed || updated)
                 {
                     speedToIAF = adjSpeedToIAF;
-                    Deb.Log("Changed speedToIAF to {0:F2}", speedToIAF);
+                    Log.detail("Changed speedToIAF to {0:F2}", speedToIAF);
                     GeneralUI.postMessage("To IAF speed updated");
 
                     GUI.FocusControl("Target Hdg: ");
@@ -3472,7 +3472,7 @@ namespace Kramax
                 if (update_button_pressed || updated)
                 {
                     speedToFAF = adjSpeedToFAF;
-                    Deb.Log("Changed speedToFAF to {0:F2}", speedToFAF);
+                    Log.detail("Changed speedToFAF to {0:F2}", speedToFAF);
                     GeneralUI.postMessage("To FAF speed updated");
 
                     GUI.FocusControl("Target Hdg: ");
@@ -3493,7 +3493,7 @@ namespace Kramax
                 if (update_button_pressed || updated)
                 {
                     speedFinal = adjSpeedFinal;
-                    Deb.Log("Changed speedFinal to {0:F2}", speedFinal);
+                    Log.detail("Changed speedFinal to {0:F2}", speedFinal);
                     GeneralUI.postMessage("Final approach speed updated");
 
                     GUI.FocusControl("Target Hdg: ");
@@ -3637,7 +3637,7 @@ namespace Kramax
          */
         public void OnDestroy()
         {
-            Deb.Log("George: OnDestroy {0} with vessel {1}", this.GetInstanceID(), vessel);
+            Log.detail("George: OnDestroy {0} with vessel {1}", this.GetInstanceID(), vessel);
 
             UnhookVessel(vessel);
 
@@ -3666,7 +3666,7 @@ namespace Kramax
 
         public void StartFlightPlanManager()
         {
-            Deb.Log("FlightPlanManager.Start: load flight plans from config");
+            Log.detail("FlightPlanManager.Start: load flight plans from config");
             LoadPlansFromConfig();
         }
 
@@ -3695,7 +3695,7 @@ namespace Kramax
                     {
                         if (flightPlansDict.TryGetValue(planet.name, out plans))
                         {
-                            Deb.Log("UpdateFlightPlans: got plans for planet {0}", planet.name);
+                            Log.detail("UpdateFlightPlans: got plans for planet {0}", planet.name);
 							plans.Sort();
                         }
                     }
@@ -3711,7 +3711,7 @@ namespace Kramax
         {
             foreach (ConfigNode listNode in node.nodes)
             {
-                Deb.Log("LoadPlansFromNode: list node {0}", listNode.name);
+                Log.detail("LoadPlansFromNode: list node {0}", listNode.name);
 
 				string planet_name = listNode.name;
 
@@ -3719,12 +3719,12 @@ namespace Kramax
 
                 if (flightPlansDict.TryGetValue(planet_name, out fplist))
                 {
-                    Deb.Log("LoadPlansFromNode: fplist for planet {0} already exists.", planet_name);
+                    Log.detail("LoadPlansFromNode: fplist for planet {0} already exists.", planet_name);
 					fplist.Sort();
                 }
                 else
                 {
-                    Deb.Log("LoadPlansFromNode: create fplist for planet {0}.", planet_name);
+                    Log.detail("LoadPlansFromNode: create fplist for planet {0}.", planet_name);
                     fplist = new List<FlightPlan>();
                     flightPlansDict[planet_name] = fplist;
                 }
@@ -3739,12 +3739,12 @@ namespace Kramax
 
                     if (existing_index < 0)
                     {
-                        Deb.Log("LoadPlansFromNode: new flight plan named {0}.", fp.name);
+                        Log.detail("LoadPlansFromNode: new flight plan named {0}.", fp.name);
                         fplist.Add(fp);
                     }
                     else
                     {
-                        Deb.Log("LoadPlansFromNode: existing flight plan named {0} will be overwritten.", fp.name);
+                        Log.detail("LoadPlansFromNode: existing flight plan named {0} will be overwritten.", fp.name);
                         fplist[existing_index] = fp;
                     }
                 }
@@ -3753,14 +3753,14 @@ namespace Kramax
 
         private void LoadPlansFromSingleFile(ConfigNode node)
         {
-            Deb.Log("LoadPlansFromFile: tl node {0}", node.name);
+            Log.detail("LoadPlansFromFile: tl node {0}", node.name);
             LoadPlansFromNode(node);
 
             // try to update the in game nodes to ours
             // this will only be done for the non-default nodes
             if (node.name == FLIGHTPLAN_NODENAME)
             {
-                Deb.Log("LoadPlansFromFile: try to update ingame nodes...");
+                Log.detail("LoadPlansFromFile: try to update ingame nodes...");
 
                 foreach (ConfigNode enode in GameDatabase.Instance.GetConfigNodes(FLIGHTPLAN_NODENAME))
                 {
@@ -3768,9 +3768,9 @@ namespace Kramax
                     enode.ClearData();
 
                     node.CopyTo(enode);
-                    Deb.Log("LoadPlansFromFile: in game node now {0}", enode.ToString());
+                    Log.detail("LoadPlansFromFile: in game node now {0}", enode.ToString());
                 }
-                Deb.Log("LoadPlansFromFile: done.");
+                Log.detail("LoadPlansFromFile: done.");
             }
         }
 
@@ -3778,41 +3778,41 @@ namespace Kramax
         {	        
             flightPlansDict.Clear();
 			{
-				Deb.Log("Loading {0}...", "DefaultFlightPlans.cfg");
+				Log.detail("Loading {0}...", "DefaultFlightPlans.cfg");
 				LoadPlansFromSingleFile(DEFAULT_FLIGHTPLANS.Load().Node);
 			}
 			{
 				string[] files = AssetConfig.ListForType<KramaxAutoPilot>("*.cfg", true);
-				Deb.Log("Found {0} additional Flight Plan files on GameData assets.", files.Length -1);
+				Log.detail("Found {0} additional Flight Plan files on GameData assets.", files.Length -1);
 				for (int i = files.Length; --i >= 0;)
 				{
 					if (files[i] == DEFAULT_FLIGHTPLANS.KspPath)
 						continue;
-					Deb.Log("Loading {0}...", files[i]);
+					Log.detail("Loading {0}...", files[i]);
 					AssetConfig plan = AssetConfig.ForType<KramaxAutoPilot>(DEFAULT_FLIGHTPLAN_NODENAME, files[i]);
 					if (plan.IsLoadable) try
 					{
 						LoadPlansFromSingleFile(plan.Load().Node);
 					} catch (Exception e)
 					{
-						Deb.Err("FlightPlan {0} could not be read due {1}.", plan.KspPath, e.Message);
+						Log.error(e, "FlightPlan {0} could not be read due {1}.", plan.KspPath, e.Message);
 					}
 				}
 			}
 			{
 				string[] files = PluginConfig.ListForType<KramaxAutoPilot>("*.cfg", true);
-				Deb.Log("Found {0} Flight Plan files on User's PluginData assets", files.Length);
+				Log.detail("Found {0} Flight Plan files on User's PluginData assets", files.Length);
 				for (int i = files.Length; --i >= 0;)
 				{
 					if (files[i].StartsWith("_")) continue;
-					Deb.Log("Loading {0}...", files[i]);
+					Log.detail("Loading {0}...", files[i]);
 					PluginConfig plan = PluginConfig.ForType<KramaxAutoPilot>(FLIGHTPLAN_NODENAME, files[i]);
 					if (plan.IsLoadable) try
 					{
 						LoadPlansFromSingleFile(plan.Load().Node);
 					} catch (Exception e)
 					{
-						Deb.Err("FlightPlan {0} could not be read due {1}.", plan.KspPath, e.Message);
+						Log.error(e, "FlightPlan {0} could not be read due {1}.", plan.KspPath, e.Message);
 					}
 				}
 			}
@@ -3822,7 +3822,7 @@ namespace Kramax
 				LoadPlansFromSingleFile(USER_FLIGHTPLANS.Load().Node);
 			} catch (Exception e)
 			{
-				Deb.Err("User's Flight Plans {0} could not be read due {1}.", USER_FLIGHTPLANS.KspPath, e.Message);
+				Log.error(e, "User's Flight Plans {0} could not be read due {1}.", USER_FLIGHTPLANS.KspPath, e.Message);
 			}
 			
             planet = vessel.mainBody;
@@ -3831,7 +3831,7 @@ namespace Kramax
             {
                 if (flightPlansDict.TryGetValue(planet.name, out plans))
                 {
-                    Deb.Log("LoadPlansFromFile: got plans for planet {0}", planet.name);
+                    Log.detail("LoadPlansFromFile: got plans for planet {0}", planet.name);
 					plans.Sort();
                 }
             }
@@ -3841,7 +3841,7 @@ namespace Kramax
         {
             foreach (ConfigNode node in GameDatabase.Instance.GetConfigNodes(nodeName))
             {
-                Deb.Log("LoadPlansFromConfig: tl node {0}", node.name);
+                Log.detail("LoadPlansFromConfig: tl node {0}", node.name);
                 LoadPlansFromNode(node);
             }
         }
@@ -3867,13 +3867,13 @@ namespace Kramax
         {
             if (plan.planet == null)
             {
-                Deb.Err("SavePlan: plan has no planet");
+                Log.error("SavePlan: plan has no planet");
                 return;
             }
 
             if (plan.name == currentName)
             {
-                Deb.Log("SavePlan: same name, overwrite current");
+                Log.detail("SavePlan: same name, overwrite current");
                 plan.description = currentDesc;
             }
             else
@@ -3890,7 +3890,7 @@ namespace Kramax
 
             if (!flightPlansDict.TryGetValue(planet.name, out plans_for_planet))
             {
-                Deb.Log("SavePlan: creating new plan list for planet {0}", planet.name);
+                Log.detail("SavePlan: creating new plan list for planet {0}", planet.name);
                 plans_for_planet = new List<FlightPlan>();
                 flightPlansDict[planet.name] = plans_for_planet;
             }
@@ -3908,7 +3908,7 @@ namespace Kramax
 
             if (!plan_present)
             {
-                Deb.Log("SavePlan: plan not present, create one in list");
+                Log.detail("SavePlan: plan not present, create one in list");
                 plans_for_planet.Add(plan);
             }
 

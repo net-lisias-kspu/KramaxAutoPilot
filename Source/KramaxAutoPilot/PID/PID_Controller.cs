@@ -71,7 +71,7 @@ namespace Kramax.PID
         {
             if (active_setpoint != target_setpoint)
             {
-                Deb.Log("ResponseD: ease setpoint.");
+                Log.detail("ResponseD: ease setpoint.");
 
                 increment += easing * TimeWarp.fixedDeltaTime * 0.01;
                 if (active_setpoint < target_setpoint)
@@ -90,18 +90,18 @@ namespace Kramax.PID
                 }
             }
 
-            Deb.Log("ResponseD: raw input:{0:F2}, set:{1:F2}", input, active_setpoint);
+            Log.detail("ResponseD: raw input:{0:F2}, set:{1:F2}", input, active_setpoint);
 
             input = (invertInput ? -1 : 1) * Utils.Clamp(input, inMin, inMax);
 
             dt = TimeWarp.fixedDeltaTime;
             error = input - active_setpoint;
 
-            Deb.Log("ResponseD: input:{0:F2} dt:{1:F2} error:{2:F2}", input, dt, error);
+            Log.detail("ResponseD: input:{0:F2} dt:{1:F2} error:{2:F2}", input, dt, error);
 
             if (skipDerivative)
             {
-                Deb.Log("ResponseD: skipDerivative");
+                Log.detail("ResponseD: skipDerivative");
 
                 skipDerivative = false;
                 previous = input;
@@ -111,13 +111,13 @@ namespace Kramax.PID
 			double sum_error = integralError(error, useIntegral);
 			double delta_error = derivativeError(input);
 
-            Deb.Log("ResponseD: sum={0:F2}, P:{1:F2}, I:{2:F2}, D:{3:F2}", 
+            Log.detail("ResponseD: sum={0:F2}, P:{1:F2}, I:{2:F2}, D:{3:F2}", 
                 sum, prop_error, sum_error, delta_error);
             
             lastOutput =
              (invertOutput ? -1 : 1) * Utils.Clamp(prop_error + sum_error + delta_error, outMin, outMax);
             
-            Deb.Log("ResponseD: out:{0:F3}", lastOutput);
+            Log.detail("ResponseD: out:{0:F3}", lastOutput);
 
             return lastOutput;
         }
