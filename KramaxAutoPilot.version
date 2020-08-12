@@ -1,9 +1,9 @@
 {
 	"NAME"		: "KramaxAutoPilot /L",
-	"URL"		: "https://raw.githubusercontent.com/net.lisias.ksp/KramaxAutoPilot/master/KramaxAutoPilot.version",
-	"DOWNLOAD"	: "https://github.com/net.lisias.ksp/KramaxAutoPilot",
+	"URL"		: "https://raw.githubusercontent.com/net-lisias-ksp/KramaxAutoPilot/master/KramaxAutoPilot.version",
+	"DOWNLOAD"	: "https://github.com/net-lisias-ksp/KramaxAutoPilot",
 	"CHANGE_LOG"	: "https://raw.githubusercontent.com/net-lisias-ksp/KramaxAutoPilot/master/CHANGE_LOG.md",
-	"CHANGE_LOG_URL": "https://raw.githubusercontent.com/net-lisias-ksp/KramaxAutoPilot/master/CHAMGES.md",
+	"CHANGE_LOG_URL": "https://raw.githubusercontent.com/net-lisias-ksp/KramaxAutoPilot/master/CHANGES.md",
 	"VERSION":{
 		"MAJOR":0,
 		"MINOR":4,
