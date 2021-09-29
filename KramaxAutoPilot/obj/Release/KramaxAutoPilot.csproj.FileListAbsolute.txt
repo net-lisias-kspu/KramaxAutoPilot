@@ -23,3 +23,4 @@ D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.pdb
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csprojResolveAssemblyReference.cache
 D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\bin\Release\ClickThroughBlocker.dll
+D:\Users\jbb\github\KramaxAutoPilot\KramaxAutoPilot\obj\Release\KramaxAutoPilot.csprojAssemblyReference.cache
