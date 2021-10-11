@@ -1,25 +1,21 @@
-# Kramax Autopilot /L
+# Kramax Autopilot /L Unofficial
 
 Kramax Autopilot is a course guidance and auto-land for spaceplanes.
 
-This is Lisias' fork for Kramax Autopilot.
+This is Lisias' unofficial fork for Kramax Autopilot.
 
 
 ## In a Hurry
 
-* [Latest Release](https://github.com/net-lisias-ksp/KramaxAutoPilot/releases)
-* [Binaries](https://github.com/net-lisias-ksp/KramaxAutoPilot/tree/Archive)
-* [Source](https://github.com/net-lisias-ksp/KramaxAutoPilot)
-* [Issue Tracker](https://github.com/net-lisias-ksp/KramaxAutoPilot/issues)
+* [Latest Release](https://github.com/net-lisias-kspu/KramaxAutoPilot/releases)
+* [Binaries](https://github.com/net-lisias-kspu/KramaxAutoPilot/tree/Archive)
+* [Source](https://github.com/net-lisias-kspu/KramaxAutoPilot)
+* [Issue Tracker](https://github.com/net-lisias-kspu/KramaxAutoPilot/issues)
 * Documentation	
-	+ [Homepage](http://ksp.lisias.net/add-ons/KramaxAutoPilot) on L Aerospace KSP Division
-	+ [Project's README](https://github.com/net-lisias-ksp/KramaxAutoPilot/blob/master/README.md)
-	+ [Install Instructions](https://github.com/net-lisias-ksp/KramaxAutoPilot/blob/master/INSTALL.md)
+	+ [Project's README](https://github.com/net-lisias-kspu/KramaxAutoPilot/blob/master/README.md)
+	+ [Install Instructions](https://github.com/net-lisias-kspu/KramaxAutoPilot/blob/master/INSTALL.md)
 	+ [Change Log](./CHANGE_LOG.md)
 	+ [TODO](./TODO.md) list
-* Official Distribution Sites:
-	+ [Homepage](http://ksp.lisias.net/add-ons/KramaxAutoPilot) on L Aerospace KSP Division
-	+ [Source and Binaries](https://github.com/net-lisias-ksp/KramaxAutoPilot) on GitHub.
 
 
 ## Description
@@ -80,13 +76,13 @@ Please note the copyrights and trademarks in [NOTICE](./NOTICE)
 
 ## UPSTREAM
 
+* [Crzyrndm](https://forum.kerbalspaceprogram.com/index.php?/profile/92871-crzyrndm/): (Origin, not a fork)
+	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/90252-13-pilot-assistant-atmospheric-piloting-aids-1132-may-28/&) 
+	+ [GitHub](https://github.com/Crzyrndm/Pilot-Assistant)
+* [Kramer](https://forum.kerbalspaceprogram.com/index.php?/profile/151907-kramer/): ROOT
+	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/122258-104-kramax-autopilot-course-guidance-and-auto-land-for-spaceplanes-v02/)	 
+	+ [GitHub](https://github.com/Kramax/KramaxAutoPilot))
 * [LGG](https://forum.kerbalspaceprogram.com/index.php?/profile/129964-linuxgurugamer/): PARENT
 	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/150846-141-kramax-autopilot-continued-course-guidance-and-auto-land-for-spaceplanes/)
 	+ [SpaceDock](https://spacedock.info/mod/1019/Kramax%20Autopilot%20Continued)
 	+ [GitHub](https://github.com/linuxgurugamer/KramaxAutoPilot)
-* [Kramer](https://forum.kerbalspaceprogram.com/index.php?/profile/151907-kramer/): ROOT
-	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/122258-104-kramax-autopilot-course-guidance-and-auto-land-for-spaceplanes-v02/)	 
-	+ [GitHub](https://github.com/Kramax/KramaxAutoPilot))
-* [Crzyrndm](https://forum.kerbalspaceprogram.com/index.php?/profile/92871-crzyrndm/): (Origin, not a fork)
-	+ [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/90252-13-pilot-assistant-atmospheric-piloting-aids-1132-may-28/&) 
-	+ [GitHub](https://github.com/Crzyrndm/Pilot-Assistant)
