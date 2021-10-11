@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("")]
 [assembly: AssemblyTitle("KramaxAutoPilot /L Unofficial")]
+[assembly: AssemblyDescription("Course guidance and auto-land for spaceplanes")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kramax")]
-[assembly: AssemblyProduct("KramaxAutoPilot")]
-[assembly: AssemblyCopyright("© 2015-2016 Crzyrndm, © 2017-2018 LinuxGuruGamer, © 2018-2020 LisiasT")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany(Kramax.LegalMamboJambo.Company)]
+[assembly: AssemblyProduct(Kramax.LegalMamboJambo.Product)]
+[assembly: AssemblyCopyright(Kramax.LegalMamboJambo.Copyright)]
+[assembly: AssemblyTrademark(Kramax.LegalMamboJambo.Trademark)]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -37,5 +37,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion(Kramax.Version.Number)]
 [assembly: KSPAssembly("KramaxAutoPilot", Kramax.Version.major, Kramax.Version.minor)]
 
-[assembly: KSPAssemblyDependency("KSPe", 2, 1)]
+[assembly: KSPAssemblyDependency("KSPe", 2, 4)]
 [assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
