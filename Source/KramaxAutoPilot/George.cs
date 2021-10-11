@@ -21,6 +21,7 @@ using System.Linq;
 using UnityEngine;
 
 using KSPe;
+using GUI = KSPe.UI.GUI;
 using GUILayout = KSPe.UI.GUILayout;
 
 

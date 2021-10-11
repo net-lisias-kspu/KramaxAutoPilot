@@ -12,17 +12,6 @@ namespace Kramax
     {
         private static readonly Logger log = Logger.CreateForType<KramaxAutoPilot>();
 
-        internal static void init()
-        {
-            log.level =
-#if DEBUG
-                Level.TRACE
-#else
-                Level.INFO
-#endif
-                ;
-        }
-
         internal static void force (string msg, params object [] @params)
         {
             log.force (msg, @params);

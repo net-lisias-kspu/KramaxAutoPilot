@@ -23,6 +23,9 @@ using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
 using MonoBehaviour = KramaxReloadExtensions.ReloadableMonoBehaviour;
 #endif
 
+using GUI = KSPe.UI.GUI;
+using GUILayout = KSPe.UI.GUILayout;
+
 namespace Kramax
 {
     using Utility;
