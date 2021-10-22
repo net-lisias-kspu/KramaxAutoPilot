@@ -91,7 +91,7 @@ namespace Kramax
         public void Awake()
         {
             Log.detail("KramaxAutoPilot: Awake {0}", this.GetInstanceID());
-            RegisterToolbar.register_toolbar(gameObject);
+            ToolbarController.register_toolbar(gameObject);
         }
 
         private bool UseAppLauncher()
@@ -130,7 +130,8 @@ namespace Kramax
             // Deb.Verb("KramaxAutoPilot: Update");
             if (UseAppLauncher())
             {
-                Kramax.RegisterToolbar.setBtnState(bDisplayAutoPilot);
+                // Not needed. KSPe.Toolbar handles the mess itself.
+                //Kramax.RegisterToolbar.setBtnState(bDisplayAutoPilot);
              
             }
         }

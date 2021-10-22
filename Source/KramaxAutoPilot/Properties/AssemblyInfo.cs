@@ -38,4 +38,4 @@ using System.Runtime.InteropServices;
 [assembly: KSPAssembly("KramaxAutoPilot", Kramax.Version.major, Kramax.Version.minor)]
 
 [assembly: KSPAssemblyDependency("KSPe", 2, 4)]
-[assembly: KSPAssemblyDependency("ToolbarController", 1, 0)]
+[assembly: KSPAssemblyDependency("KSPe.UI", 2, 4)]
