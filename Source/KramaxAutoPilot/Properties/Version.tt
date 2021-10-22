@@ -83,9 +83,13 @@ namespace Kramax
 		public const int patch = <#= patch #>;
 		public const int build = <#= build #>;
 		public const string Number = "<#= major #>.<#= minor #>.<#= patch #>.<#= build #>";
-		public const string Text = Number + " /L Unofficial";
 		public const string Vendor = "net.lisias.ksp";
 		public const string Namespace = "<#= PROJECT_NAME #>";
 		public const string FriendlyName = "Kramar Auto Pilot";
+#if DEBUG
+		public const string Text = Number + " /L Unleashed DEBUG";
+#else
+		public const string Text = Number + " /L Unleashed";
+#endif
 	}
 }

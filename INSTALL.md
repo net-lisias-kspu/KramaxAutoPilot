@@ -1,8 +1,8 @@
-# Kramax Autopilot /L
+# Kramax Autopilot /L Unleashed
 
 Kramax Autopilot is a course guidance and auto-land for spaceplanes.
 
-This is Lisias' fork for Kramax Autopilot.
+[Unleashed](https://ksp.lisias.net/add-ons-unleashed/) fork by Lisias.
 
 
 ## Installation Instructions
