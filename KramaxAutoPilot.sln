@@ -30,5 +30,8 @@ Global
 		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$0.StandardHeader = $2
 		$0.VersionControlPolicy = $3
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 132
+		$4.scope = text/plain
 	EndGlobalSection
 EndGlobal
